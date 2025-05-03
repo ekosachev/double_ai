@@ -1,0 +1,16 @@
+venv/
+env/
+__pycache__
+*.ipynb
+*.vscode/
+
+
+node_modules/
+**js/
+db-data/
+static/
+nginx/*
+!nginx/server.conf
+.env
+app/.venv
+db.env

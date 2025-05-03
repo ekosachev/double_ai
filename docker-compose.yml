@@ -1,0 +1,55 @@
+version: '3.9'
+
+services:
+  backend:
+    container_name: backend
+    restart: always
+    command: python3 __main__.py
+    env_file: .env
+    build:
+      context: ./app
+      dockerfile: app.dockerfile
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+
+  db:
+    container_name: db
+    image: postgres:16
+    env_file: db.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+#   frontend:
+#     container_name: ez-frontend
+#     restart: unless-stopped
+#     env_file: front/.env
+#     build:
+#       context: ./front
+#       dockerfile: front.dockerfile
+#     depends_on:
+#       - backend
+#     expose:
+#       - 3000
+#
+#   caddy:
+#     image: caddy:latest
+#     container_name: caddy
+#     restart: always
+#     ports:
+#       - 80:80
+#       - 443:443
+#     volumes:
+#       - ./Caddyfile:/etc/caddy/Caddyfile
+#       - caddy_data:/data
+#       - caddy_config:/config
+#     depends_on:
+#       - backend
+#
+volumes:
+  postgres-data:
+#   caddy_data:
+#   caddy_config:
