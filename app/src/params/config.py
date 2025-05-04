@@ -8,6 +8,7 @@ class Config(BaseSettings):
     dbname: str
     dbport: str
     reset_db: bool
+    openrouter_key: str
 
     @property
     def db_url(self) -> str:
