@@ -23,6 +23,19 @@ services:
     ports:
       - 5432:5432
 
+  frontend:
+      container_name: frontend
+      env_file: .env
+      build:
+        context: ./front
+        dockerfile: front.dockerfile
+      ports:
+        - "3000:3000"  
+      environment:
+        - NODE_ENV=production
+      depends_on:
+        - backend
+      restart: "no"
 #   frontend:
 #     container_name: ez-frontend
 #     restart: unless-stopped
