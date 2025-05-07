@@ -1,11 +1,18 @@
+{
+	debug
+	log {
+		output stdout
+		format console
+		level DEBUG
+	}
+}
 double-ai.ru {
-    encode gzip
+	tls /etc/caddy/cert/double-ai.ru.crt /etc/caddy/cert/double-ai.ru.key
+	
+	handle /backend/* {
+		uri strip_prefix /backend
+		reverse_proxy backend:8000
+	}
 
-    handle / {
-        reverse_proxy frontend:3000
-    }
-
-    handle /backend/* {
-        reverse_proxy backend:8000
-    }
+	respond /status "OK" 200
 }
