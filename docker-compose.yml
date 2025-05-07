@@ -34,8 +34,8 @@ services:
     networks:
       - app-network
     depends_on:
-      - frontend
-      # - backend
+      # - frontend
+      - backend
 
 #   frontend:
 #     container_name: ez-frontend
