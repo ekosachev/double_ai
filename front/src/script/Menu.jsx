@@ -16,16 +16,36 @@ function Menu() {
 
                 </div>
                 <div className="menu-group-params">
-                    <a href="#" className="params-action-disable">Короче</a>
-                    <a href="#" className="params-action-active">Стандартно</a>
-                    <a href="#" className="params-action-disable">Подробнее</a>
-                    <a href="#" className="params-action-active action-list">
+                    <a href="#" className="params-action params-action-disable">Короче</a>
+                    <a href="#" className="params-action params-action-active">Стандартно</a>
+                    <a href="#" className="params-action params-action-disable">Подробнее</a>
+                    <a href="#" className="params-action params-action-active action-list">
                         <div className="action-list-text">Deepseek V3</div>
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.4159 4.2671L6.01798 7.63599L2.64934 4.23807C2.5561 4.14387 2.40406 4.14339 2.30998 4.23663C2.2159 4.32987 2.2153 4.4819 2.30854 4.57587L5.81182 8.10963C5.85562 8.15379 5.91202 8.17719 5.96926 8.18031C5.98594 8.18127 6.00262 8.18019 6.01906 8.17779C6.02554 8.17875 6.03178 8.18031 6.03826 8.18043C6.10354 8.18391 6.17014 8.16099 6.22006 8.11131L9.7537 4.60778C9.8479 4.51454 9.8485 4.36262 9.75514 4.26842C9.66178 4.17422 9.50986 4.17374 9.4159 4.2671Z" fill="white"/>
                         </svg>
+
+                        <div className="list-items">
+                            <ul>
+                                <li className="list-item ">
+                                    <a href="#">Deepseek V3</a>
+                                </li>
+                                <li className="list-item">
+                                    <a href="#">Microsoft Phi 4 Reasoning</a>
+                                </li>
+                                <li className="list-item">
+                                    <a href="#">Quen 3</a>
+                                </li>
+                                <li className="list-item">
+                                    <a href="#">InternVL3</a>
+                                </li>
+                                <li className="list-item">
+                                    <a href="#">Llama 3.3 Nemotron Super</a>
+                                </li>
+                            </ul>
+                        </div>
                     </a>
-                    <a href="#" className="params-action-disable">Промт</a>
+                    <a href="#" className="params-action params-action-disable">Промт</a>
                 </div>
                 <div className="menu-group-append">
                     <a href="#" className="append-user">
