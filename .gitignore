@@ -14,3 +14,5 @@ nginx/*
 .env
 app/.venv
 db.env
+
+.idea
