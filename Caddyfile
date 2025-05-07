@@ -1,4 +1,4 @@
-hack.double-ai.ru {
+double-ai.ru {
     encode gzip
 
     handle / {
