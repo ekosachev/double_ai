@@ -47,10 +47,10 @@
 
 .list-items{
     width: 104px;
-    height: 94px;
+    /*height: 94px;*/
     border-radius: 6px;
     background: #D9D9D9;
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     flex-direction: column;
     justify-content: center;
@@ -58,6 +58,7 @@
     top: 0;
     left: 0;
     padding: 2px 4px 6px 4px;
+    display: none;
 }
 
 .list-item{
@@ -77,5 +78,17 @@
     text-overflow: ellipsis;
     display: block;
     white-space: nowrap;
-    width: 100%;
+    width: 96px;
+    border: 1px solid transparent;
+}
+.list-item a:hover{
+    border-color: #000;
+    border-radius: 6px;
+}
+
+.menu-group-append{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
