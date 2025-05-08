@@ -1,5 +1,5 @@
 from src.logs import get_logger
-from src.services.branch import get_branch_by_id
+from src.database.branch import get_branch_by_id
 from src.services.dialogue import get_dialogue_by_id
 from ..database import message as db
 from ..database.models import models
