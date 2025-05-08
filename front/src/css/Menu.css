@@ -1,8 +1,9 @@
-.menu-group{
+.menu-group .container{
     padding: 5px 6px;
     display: flex;
     justify-content: space-between;
     align-items: start;
+    gap: 19px;
 }
 
 .menu-group-history{
