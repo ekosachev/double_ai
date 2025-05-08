@@ -1,3 +1,4 @@
+from typing import Optional
 import sqlalchemy as sqla
 from fastapi import HTTPException
 from .db import AsyncSession
@@ -40,3 +41,14 @@ async def get_message_by_id(session: AsyncSession, id: int) -> messsage_schemas.
         raise HTTPException(404, f"Message with {id=} not found")
 
     return messsage_schemas.Message.model_validate(message, from_attributes=True)
+
+
+async def update_prev_id(session: AsyncSession, msg_id: int, prev_id: Optional[int]):
+    stmt = sqla.select(models.Message).where(models.Message.id == msg_id)
+    message = (await session.execute(stmt)).scalar_one_or_none()
+    if message is None:
+        return
+    message.previous_message_id = prev_id
+    session.add(message)
+    await session.flush()
+    await session.commit()

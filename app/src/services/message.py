@@ -1,5 +1,5 @@
 from src.logs import get_logger
-from src.services.branch import get_branch_by_id
+from src.database.branch import get_branch_by_id, update_root_id, update_head_id
 from src.services.dialogue import get_dialogue_by_id
 from ..database import message as db
 from ..database.models import models
@@ -52,7 +52,15 @@ async def create_message(
             )
         message.model_response = response
 
-    return await db.create_message(session, data)
+    new_messages = await db.create_message(session, data)
+    for msg in new_messages:
+        branch = await get_branch_by_id(session, msg.branch_id)
+        prev_id = branch.root_id
+        await db.update_prev_id(session, msg.id, prev_id)
+        if branch.root_id is None:
+            await update_root_id(session, branch.id, msg.id)
+        await update_head_id(session, branch.id, msg.id)
+    return new_messages
 
 
 async def get_message_by_id(session: AsyncSession, id: int) -> schemas.Message:
