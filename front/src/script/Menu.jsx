@@ -1,8 +1,24 @@
 import '../css/Menu.css'
 import {useState} from "react";
+import $ from 'jquery';
 
 function Menu() {
     const [activeIndex, setActiveIndex] = useState(0);
+
+    const openAIList = (event) => {
+        event.preventDefault();
+        if ($(".list-items").css("display") === "none") {
+            $(".list-items").css('display', 'flex');
+        }else{
+            $(".list-items").css('display', 'none');
+        }
+    }
+
+    const changeAI = (event) => {
+        event.preventDefault();
+        // $(".action-list-text").text($(this + "a").text());
+        console.log($(this).html())
+    }
 
     const NamesOfNeuralNetworks = ['Deepseek V3', 'Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
     return (
@@ -25,7 +41,7 @@ function Menu() {
                         <a href="#" className="params-action params-action-disable">Короче</a>
                         <a href="#" className="params-action params-action-active">Стандартно</a>
                         <a href="#" className="params-action params-action-disable">Подробнее</a>
-                        <a href="#" className="params-action params-action-active action-list">
+                        <a href="#" className="params-action params-action-active action-list" onClick={openAIList}>
                             <div className="action-list-text">Deepseek V3</div>
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +56,8 @@ function Menu() {
                                         <li
                                             key={index}
                                             className={`list-item ${index === activeIndex ? 'list-item-active' : ''}`}
-                                            onClick={() => setActiveIndex(index)}
+                                            onClick={changeAI}
+
                                         >
                                             <a href="#">{name}</a>
                                         </li>
