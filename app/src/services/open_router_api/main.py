@@ -1,4 +1,3 @@
-from enum import verify
 from logging import Logger
 from typing import Optional
 

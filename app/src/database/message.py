@@ -1,6 +1,7 @@
 from typing import Optional
 import sqlalchemy as sqla
 from fastapi import HTTPException
+
 from .db import AsyncSession
 from ..schemas import message as messsage_schemas
 from .models import models
@@ -50,5 +51,15 @@ async def update_prev_id(session: AsyncSession, msg_id: int, prev_id: Optional[i
         return
     message.previous_message_id = prev_id
     session.add(message)
+    await session.flush()
+    await session.commit()
+
+
+async def set_model_response(session: AsyncSession, message_id: int, response: str):
+    stmt = sqla.select(models.Message).where(models.Message.id == message_id)
+    message = (await session.execute(stmt)).scalar_one_or_none()
+    if message is None:
+        return
+    message.model_response = response
     await session.flush()
     await session.commit()
