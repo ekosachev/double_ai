@@ -48,6 +48,7 @@ async def update_root_id(
 
     branch.root_id = root_id
     session.add(branch)
+    await session.flush()
     await session.commit()
 
     return await get_branch_by_id(session, branch_id)
@@ -63,6 +64,7 @@ async def update_head_id(
 
     branch.head_id = head_id
     session.add(branch)
+    await session.flush()
     await session.commit()
 
     return await get_branch_by_id(session, branch_id)
