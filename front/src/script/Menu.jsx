@@ -1,11 +1,11 @@
-import {useState} from 'react'
 import '../css/Menu.css'
+import {useState} from "react";
 
 function Menu() {
-    const [count, setCount] = useState(0)
+    const [activeIndex, setActiveIndex] = useState(0);
 
+    const NamesOfNeuralNetworks = ['Deepseek V3', 'Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
     return (
-        <>
             <div className="menu-group">
                 <div className="container">
                     <div className="menu-group-history">
@@ -37,23 +37,15 @@ function Menu() {
 
                             <div className="list-items">
                                 <ul>
-                                    {/*При помощи API получать названия всех нейронок и прогнать их через цикл*/}
-                                    {/*позже добавть выделение цветом активной нейронки*/}
-                                    <li className="list-item list-item-active">
-                                        <a href="#">Deepseek V3</a>
-                                    </li>
-                                    <li className="list-item">
-                                        <a href="#">Microsoft Phi 4 Reasoning</a>
-                                    </li>
-                                    <li className="list-item">
-                                        <a href="#">Quen 3</a>
-                                    </li>
-                                    <li className="list-item">
-                                        <a href="#">InternVL3</a>
-                                    </li>
-                                    <li className="list-item">
-                                        <a href="#">Llama 3.3 Nemotron Super</a>
-                                    </li>
+                                    {NamesOfNeuralNetworks.map((name, index) => (
+                                        <li
+                                            key={index}
+                                            className={`list-item ${index === activeIndex ? 'list-item-active' : ''}`}
+                                            onClick={() => setActiveIndex(index)}
+                                        >
+                                            <a href="#">{name}</a>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         </a>
@@ -91,7 +83,7 @@ function Menu() {
                     </div>
                 </div>
             </div>
-        </>)
+    )
 }
 
 export default Menu
