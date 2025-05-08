@@ -1,5 +1,10 @@
 from src.logs import get_logger
-from src.database.branch import get_branch_by_id, update_root_id, update_head_id
+from src.services.branch import (
+    get_all_messages,
+    get_branch_by_id,
+    update_root_id,
+    update_head_id,
+)
 from src.services.dialogue import get_dialogue_by_id
 from ..database import message as db
 from ..database.models import models
@@ -32,14 +37,27 @@ async def create_message(
     if len(missing_prev_ids) != 0:
         raise HTTPException(404, f"Messages with ids {missing_prev_ids=}, do not exist")
 
-    for message in data:
+    new_messages = await db.create_message(session, data)
+    for msg in new_messages:
+        branch = await get_branch_by_id(session, msg.branch_id)
+        if msg.previous_message_id is None:
+            await db.update_prev_id(session, msg.id, branch.head_id)
+        if branch.root_id is None:
+            await update_root_id(session, branch.id, msg.id)
+        await update_head_id(session, branch.id, msg.id)
+
+    for message in new_messages:
         branch = await get_branch_by_id(session, message.branch_id)
         dialogue = await get_dialogue_by_id(session, branch.dialogue_id)
         response = None
+        context = await get_full_context(session, message.id)
+        context.pop(-1)
         for attempt in range(MAX_GENERATION_ATTEMPTS):
             logger.info(f"Generating completion for message. Attempt #{attempt + 1}")
             response = await open_router_api.request_completion(
-                dialogue.model, message.user_message
+                dialogue.model,
+                message.user_message,
+                [(msg.user_message, msg.model_response) for msg in context],
             )
             if response is None:
                 logger.warning("Failed to generate completion")
@@ -50,16 +68,8 @@ async def create_message(
                 500,
                 f"Could not generate completion in {MAX_GENERATION_ATTEMPTS} tries, aborting",
             )
-        message.model_response = response
+        await db.set_model_response(session, message.id, response)
 
-    new_messages = await db.create_message(session, data)
-    for msg in new_messages:
-        branch = await get_branch_by_id(session, msg.branch_id)
-        prev_id = branch.root_id
-        await db.update_prev_id(session, msg.id, prev_id)
-        if branch.root_id is None:
-            await update_root_id(session, branch.id, msg.id)
-        await update_head_id(session, branch.id, msg.id)
     return new_messages
 
 
@@ -69,3 +79,22 @@ async def get_message_by_id(session: AsyncSession, id: int) -> schemas.Message:
 
 async def get_messages(session: AsyncSession) -> list[schemas.Message]:
     return await db.get_messages(session)
+
+
+async def get_full_context(
+    session: AsyncSession, message_id: int
+) -> list[schemas.Message]:
+    message = await get_message_by_id(session, message_id)
+    branch_context = await get_all_messages(session, message.branch_id)
+    branch = await get_branch_by_id(session, message.branch_id)
+
+    context = []
+    for msg in branch_context:
+        context.append(msg)
+        if msg.id == message_id:
+            break
+
+    if branch.parent_branch_id is not None:
+        context = await get_full_context(session, context[0].previous_message_id)
+
+    return context
