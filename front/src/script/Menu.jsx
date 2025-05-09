@@ -1,104 +1,74 @@
-import '../css/Menu.css'
+import '../css/Menu.css';
+
+import menuIcon from '../assets/icons/menu.svg';
+import arrowDownIcon from '../assets/icons/arrow-down.svg';
+import newUserIcon from '../assets/icons/new-user.svg';
+import newChatIcon from '../assets/icons/new-chat.svg';
+
 import {useState} from "react";
-import $ from 'jquery';
 
 function Menu() {
-    const [activeIndex, setActiveIndex] = useState(0);
-
-    const openAIList = (event) => {
-        event.preventDefault();
-        if ($(".list-items").css("display") === "none") {
-            $(".list-items").css('display', 'flex');
-        }else{
-            $(".list-items").css('display', 'none');
-        }
-    }
-
-    const changeAI = (event) => {
-        event.preventDefault();
-        // $(".action-list-text").text($(this + "a").text());
-        console.log($(this).html())
-    }
-
     const NamesOfNeuralNetworks = ['Deepseek V3', 'Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
-    return (
-            <div className="menu-group">
-                <div className="container">
-                    <div className="menu-group-history">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M1 12C1 11.4477 1.44772 11 2 11H22C22.5523 11 23 11.4477 23 12C23 12.5523 22.5523 13 22 13H2C1.44772 13 1 12.5523 1 12Z"
-                                fill="white"/>
-                            <path
-                                d="M1 4C1 3.44772 1.44772 3 2 3H22C22.5523 3 23 3.44772 23 4C23 4.55228 22.5523 5 22 5H2C1.44772 5 1 4.55228 1 4Z"
-                                fill="white"/>
-                            <path
-                                d="M1 20C1 19.4477 1.44772 19 2 19H22C22.5523 19 23 19.4477 23 20C23 20.5523 22.5523 21 22 21H2C1.44772 21 1 20.5523 1 20Z"
-                                fill="white"/>
-                        </svg>
-                    </div>
-                    <div className="menu-group-params">
-                        <a href="#" className="params-action params-action-disable">Короче</a>
-                        <a href="#" className="params-action params-action-active">Стандартно</a>
-                        <a href="#" className="params-action params-action-disable">Подробнее</a>
-                        <a href="#" className="params-action params-action-active action-list" onClick={openAIList}>
-                            <div className="action-list-text">Deepseek V3</div>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.4159 4.2671L6.01798 7.63599L2.64934 4.23807C2.5561 4.14387 2.40406 4.14339 2.30998 4.23663C2.2159 4.32987 2.2153 4.4819 2.30854 4.57587L5.81182 8.10963C5.85562 8.15379 5.91202 8.17719 5.96926 8.18031C5.98594 8.18127 6.00262 8.18019 6.01906 8.17779C6.02554 8.17875 6.03178 8.18031 6.03826 8.18043C6.10354 8.18391 6.17014 8.16099 6.22006 8.11131L9.7537 4.60778C9.8479 4.51454 9.8485 4.36262 9.75514 4.26842C9.66178 4.17422 9.50986 4.17374 9.4159 4.2671Z"
-                                    fill="white"/>
-                            </svg>
 
-                            <div className="list-items">
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [isVisible, setIsVisible] = useState(true);
+    const [selectedText, setSelectedText] = useState(NamesOfNeuralNetworks[0]);
+
+    const handleItemClick = (index) => {
+        setActiveIndex(index);
+        setSelectedText(NamesOfNeuralNetworks[index]);
+        setIsVisible(false); // Закрываем список после выбора
+    };
+
+    return (
+        <div className="menu-group">
+            <div className="container">
+                <div className="menu-group-history">
+                    <img src={menuIcon} alt="История"/>
+                </div>
+                <div className="menu-group-params">
+                    <a href="#" className="params-action params-action-disable">Короче</a>
+                    <a href="#" className="params-action params-action-active">Стандартно</a>
+                    <a href="#" className="params-action params-action-disable">Подробнее</a>
+                    <a
+                        href="#"
+                        className="params-action params-action-active action-list"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsVisible(!isVisible);
+                        }}
+                    >
+                        <div className="action-list-text">
+                            {selectedText}
+                        </div>
+                        <img src={arrowDownIcon} alt="Стрелка"/>
+                        {!isVisible && (<div className="list-items">
                                 <ul>
                                     {NamesOfNeuralNetworks.map((name, index) => (
                                         <li
                                             key={index}
                                             className={`list-item ${index === activeIndex ? 'list-item-active' : ''}`}
-                                            onClick={changeAI}
-
+                                            onClick={() => handleItemClick(index)}
                                         >
-                                            <a href="#">{name}</a>
+                                            {name}
                                         </li>
                                     ))}
                                 </ul>
                             </div>
-                        </a>
-                        <a href="#" className="params-action params-action-disable">Промт</a>
-                    </div>
-                    <div className="menu-group-append">
-                        <a href="#" className="append-user">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M10.125 11.868C12.735 11.868 14.8515 9.7515 14.8515 7.1415C14.8515 4.5315 12.735 2.415 10.125 2.415C7.51498 2.415 5.39848 4.5315 5.39848 7.1415C5.40148 9.75075 7.51648 11.865 10.125 11.868ZM10.125 3.54C12.114 3.54 13.7265 5.1525 13.7265 7.1415C13.7265 9.1305 12.114 10.743 10.125 10.743C8.13598 10.743 6.52348 9.1305 6.52348 7.1415C6.52573 5.15325 8.13673 3.54225 10.125 3.54ZM10.125 13.5248C5.65798 13.5435 1.92373 16.662 0.962982 20.8395L0.950982 20.9032C0.942732 20.9393 0.938232 20.9805 0.938232 21.0233C0.938232 21.3337 1.19023 21.5858 1.50073 21.5858C1.76848 21.5858 1.99273 21.3982 2.04898 21.147L2.04973 21.1432C2.89273 17.4023 6.18748 14.6498 10.1257 14.6498C14.064 14.6498 17.358 17.4023 18.1912 21.0877L18.2017 21.1432C18.2557 21.3983 18.4792 21.5865 18.7462 21.5865C18.7905 21.5865 18.834 21.5812 18.8752 21.5715L18.8715 21.5723C19.1265 21.5153 19.314 21.291 19.314 21.0225C19.314 20.9797 19.3095 20.9385 19.3005 20.8988L19.3012 20.9025C18.327 16.662 14.5942 13.5435 10.1287 13.524H10.1265L10.125 13.5248ZM22.5 10.3148H20.436V8.25C20.436 7.9395 20.184 7.6875 19.8735 7.6875C19.563 7.6875 19.311 7.9395 19.311 8.25V10.3148H17.2455C16.935 10.3148 16.683 10.5668 16.683 10.8773C16.683 11.1877 16.935 11.4397 17.2455 11.4397H19.311V13.5045C19.311 13.815 19.563 14.067 19.8735 14.067C20.184 14.067 20.436 13.815 20.436 13.5045V11.4397H22.5C22.8105 11.4397 23.0625 11.1877 23.0625 10.8773C23.0625 10.5668 22.8105 10.3148 22.5 10.3148Z"
-                                    fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="#" className="append-chat">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M6.04998 16.64C5.92139 16.6399 5.79499 16.6067 5.68291 16.5437C5.57083 16.4806 5.47685 16.3898 5.40998 16.28C4.67584 15.0696 4.24633 13.6992 4.15829 12.2864C4.07026 10.8735 4.32634 9.46036 4.90456 8.16822C5.48277 6.87609 6.36586 5.74353 7.47804 4.86775C8.59022 3.99196 9.89828 3.39909 11.29 3.14001C11.3908 3.11179 11.4964 3.10498 11.6 3.12003C11.7036 3.13507 11.8029 3.17163 11.8915 3.22735C11.9801 3.28308 12.056 3.35673 12.1145 3.44358C12.1729 3.53043 12.2125 3.62854 12.2307 3.73162C12.249 3.83469 12.2454 3.94044 12.2203 4.04206C12.1952 4.14368 12.1491 4.23892 12.085 4.32166C12.0209 4.4044 11.9402 4.4728 11.848 4.52246C11.7559 4.57212 11.6544 4.60194 11.55 4.61001C10.181 4.86228 8.91422 5.50547 7.90276 6.46193C6.89129 7.41839 6.17833 8.64721 5.84998 10C5.39682 11.8692 5.69863 13.8418 6.68998 15.49C6.78401 15.6571 6.81049 15.8538 6.764 16.0398C6.7175 16.2257 6.60156 16.3868 6.43998 16.49C6.32895 16.5797 6.1925 16.6322 6.04998 16.64Z"
-                                    fill="white"/>
-                                <path
-                                    d="M12.89 20.49C11.4959 20.4816 10.1241 20.1387 8.88998 19.49C8.72322 19.3933 8.60012 19.236 8.54624 19.0509C8.49236 18.8658 8.51184 18.667 8.60062 18.4959C8.6894 18.3248 8.84068 18.1944 9.02304 18.1319C9.2054 18.0693 9.40485 18.0794 9.57998 18.16C11.0173 18.9009 12.6599 19.1436 14.25 18.85C15.7836 18.565 17.1838 17.7916 18.2418 16.6454C19.2997 15.4991 19.9586 14.0415 20.12 12.49C20.1427 12.2917 20.2424 12.1103 20.3977 11.9849C20.553 11.8596 20.7514 11.8003 20.95 11.82C21.1475 11.8402 21.3289 11.9379 21.4544 12.0916C21.58 12.2453 21.6396 12.4425 21.62 12.64C21.4203 14.5147 20.6218 16.2751 19.3429 17.6603C18.064 19.0454 16.3728 19.9816 14.52 20.33C13.9821 20.4286 13.4368 20.4822 12.89 20.49Z"
-                                    fill="white"/>
-                                <path
-                                    d="M5.14004 21C4.95092 20.9949 4.76481 20.9515 4.59293 20.8724C4.42106 20.7933 4.26699 20.6803 4.14004 20.54C3.94311 20.3419 3.80947 20.0898 3.75606 19.8156C3.70265 19.5414 3.73188 19.2575 3.84004 19L5.37004 15.58C5.45359 15.4025 5.60336 15.2648 5.78724 15.1965C5.97112 15.1281 6.17446 15.1345 6.35367 15.2143C6.53289 15.2941 6.6737 15.4409 6.74592 15.6233C6.81815 15.8057 6.81604 16.0091 6.74004 16.19L5.29004 19.45L9.00004 18.14C9.09333 18.1032 9.19305 18.0856 9.2933 18.088C9.39355 18.0905 9.49228 18.113 9.58367 18.1543C9.67506 18.1955 9.75725 18.2547 9.82537 18.3283C9.89349 18.4019 9.94616 18.4884 9.98027 18.5827C10.0143 18.677 10.0292 18.7772 10.0239 18.8773C10.0186 18.9774 9.99335 19.0755 9.94951 19.1657C9.90567 19.2559 9.84419 19.3363 9.7687 19.4024C9.69322 19.4684 9.60526 19.5186 9.51004 19.55L5.62004 20.92C5.46615 20.9753 5.30354 21.0024 5.14004 21Z"
-                                    fill="white"/>
-                                <path
-                                    d="M20.14 7.54999H14.36C14.1611 7.54999 13.9703 7.47098 13.8297 7.33032C13.689 7.18967 13.61 6.99891 13.61 6.79999C13.61 6.60108 13.689 6.41032 13.8297 6.26966C13.9703 6.12901 14.1611 6.04999 14.36 6.04999H20.14C20.3389 6.04999 20.5297 6.12901 20.6703 6.26966C20.811 6.41032 20.89 6.60108 20.89 6.79999C20.89 6.99891 20.811 7.18967 20.6703 7.33032C20.5297 7.47098 20.3389 7.54999 20.14 7.54999Z"
-                                    fill="white"/>
-                                <path
-                                    d="M17.25 10.44C17.0511 10.44 16.8603 10.361 16.7197 10.2203C16.579 10.0797 16.5 9.88888 16.5 9.68997V3.90997C16.5 3.71106 16.579 3.52029 16.7197 3.37964C16.8603 3.23899 17.0511 3.15997 17.25 3.15997C17.4489 3.15997 17.6397 3.23899 17.7803 3.37964C17.921 3.52029 18 3.71106 18 3.90997V9.68997C18 9.88888 17.921 10.0797 17.7803 10.2203C17.6397 10.361 17.4489 10.44 17.25 10.44Z"
-                                    fill="white"/>
-                            </svg>
-                        </a>
-                    </div>
+                        )}
+                    </a>
+                    <a href="#" className="params-action params-action-disable">Промт</a>
+                </div>
+                <div className="menu-group-append">
+                    <a href="#" className="append-user">
+                        <img src={newUserIcon} alt="Добавить пользователя"/>
+                    </a>
+                    <a href="#" className="append-chat">
+                        <img src={newChatIcon} alt="Новый чат"/>
+                    </a>
                 </div>
             </div>
+        </div>
     )
 }
 
