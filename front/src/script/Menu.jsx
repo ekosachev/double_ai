@@ -2,8 +2,9 @@ import '../css/Menu.css'
 import {useState} from "react";
 import $ from 'jquery';
 
-function Menu() {
-    const [activeIndex, setActiveIndex] = useState(0);
+function Menu({ onHistoryToggle }) {
+
+    const [activeIndex] = useState(0);
 
     const openAIList = (event) => {
         event.preventDefault();
@@ -24,7 +25,7 @@ function Menu() {
     return (
             <div className="menu-group">
                 <div className="container">
-                    <div className="menu-group-history">
+                    <a href="#" className="menu-group-history" onClick={ onHistoryToggle }>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M1 12C1 11.4477 1.44772 11 2 11H22C22.5523 11 23 11.4477 23 12C23 12.5523 22.5523 13 22 13H2C1.44772 13 1 12.5523 1 12Z"
@@ -36,7 +37,7 @@ function Menu() {
                                 d="M1 20C1 19.4477 1.44772 19 2 19H22C22.5523 19 23 19.4477 23 20C23 20.5523 22.5523 21 22 21H2C1.44772 21 1 20.5523 1 20Z"
                                 fill="white"/>
                         </svg>
-                    </div>
+                    </a>
                     <div className="menu-group-params">
                         <a href="#" className="params-action params-action-disable">Короче</a>
                         <a href="#" className="params-action params-action-active">Стандартно</a>
@@ -57,7 +58,6 @@ function Menu() {
                                             key={index}
                                             className={`list-item ${index === activeIndex ? 'list-item-active' : ''}`}
                                             onClick={changeAI}
-
                                         >
                                             <a href="#">{name}</a>
                                         </li>
