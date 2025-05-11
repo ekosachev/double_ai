@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'Instrument Sans';
+    src: url("../assets/fonts/InstrumentSans.ttf");
+}
+
+* {
+    font-family: 'Instrument Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #2D2C2C;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+@media screen and (max-width: 320px) {
+    .container {
+        min-width: 302px;
+        margin: 0 auto;
+    }
+}
+
+/*#root {*/
+/*    width: 320px;*/
+/*}*/
