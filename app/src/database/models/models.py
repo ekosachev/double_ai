@@ -37,6 +37,9 @@ class Dialogue(Base):
 
     # ----- REALATIONSHIPS -----
     branches: orm.Mapped[list["Branch"]] = orm.relationship(back_populates="dialogue")
+    permissions: orm.Mapped[list["Permission"]] = orm.relationship(
+        back_populates="dialogue"
+    )
 
 
 class Branch(Base):
@@ -110,4 +113,20 @@ class Message(Base):
     )
     head_of: orm.Mapped[Optional["Branch"]] = orm.relationship(
         back_populates="head", foreign_keys="Branch.head_id"
+    )
+
+
+class Permission(Base):
+    __tablename__ = "permission"
+    id: orm.Mapped[int] = orm.mapped_column(
+        primary_key=True, autoincrement=True, unique=True
+    )
+
+    can_send_messages: orm.Mapped[bool] = orm.mapped_column(default=False)
+    can_create_branches: orm.Mapped[bool] = orm.mapped_column(default=False)
+    user: orm.Mapped[str]
+
+    dialogue_id: orm.Mapped[int] = orm.mapped_column(sqla.ForeignKey("dialogue.id"))
+    dialogue: orm.Mapped[Dialogue] = orm.relationship(
+        back_populates="permissions", uselist=False
     )

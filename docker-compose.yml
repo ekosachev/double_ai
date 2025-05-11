@@ -56,6 +56,18 @@ services:
     restart: "no"
     networks:
       - app-network
+
+  bot:
+    container_name: bot
+    build:
+      context: ./bot
+      dockerfile: bot.dockerfile
+    restart: always
+    env_file: .env
+    ports:
+      - 8001:8001
+    depends_on:
+      - frontend
 volumes:
   postgres-data:
 
