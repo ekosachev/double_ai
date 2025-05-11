@@ -36,7 +36,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./cert:/etc/caddy/cert
     depends_on:
-      # - frontend
+      - frontend
       - backend
     networks:
       - app-network
@@ -54,6 +54,8 @@ services:
     depends_on:
       - backend
     restart: "no"
+    networks:
+      - app-network
 volumes:
   postgres-data:
 
