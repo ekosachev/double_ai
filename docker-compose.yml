@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   backend:
@@ -42,18 +42,18 @@ services:
       - app-network
 
   frontend:
-      container_name: frontend
-      env_file: .env
-      build:
-        context: ./front
-        dockerfile: front.dockerfile
-      ports:
-        - "3000:3000"  
-      environment:
-        - NODE_ENV=production
-      depends_on:
-        - backend
-      restart: "no"
+    container_name: frontend
+    env_file: .env
+    build:
+      context: ./front
+      dockerfile: front.dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+    restart: "no"
 volumes:
   postgres-data:
 
