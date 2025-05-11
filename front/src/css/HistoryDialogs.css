@@ -7,21 +7,45 @@
     background: rgba(0, 0, 0, 0.50);
 }
 .bgHistory {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     background: #D9D9D9;
     position: absolute;
     top: 0;
     width: 250px;
     height: 100%;
     z-index: 1000;
+    padding: 12px;
 }
 .disable-history-list{
     display: none;
 }
 
+.history-date-group{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .history-date{
+    color: #737373;
     font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .history-item a{
+    width: 204px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    color: #000;
     font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
 }
