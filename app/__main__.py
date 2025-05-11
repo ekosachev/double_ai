@@ -9,6 +9,7 @@ from src.database.db import db_create
 from src.routers.dialogue import router as dialogue_router
 from src.routers.branch import router as branch_router
 from src.routers.message import router as message_router
+from src.routers.permission import router as permission_router
 
 logger = get_logger(__name__)
 
@@ -28,6 +29,7 @@ app: FastAPI = FastAPI(
 app.include_router(dialogue_router)
 app.include_router(branch_router)
 app.include_router(message_router)
+app.include_router(permission_router)
 
 origins = ["http://localhost", "http://localhost:8080", "http://localhost:3000", "*"]
 
