@@ -1,7 +1,5 @@
 import '../css/Menu.css';
 
-// import
-
 import menuIcon from '../assets/icons/menu.svg';
 import arrowDownIcon from '../assets/icons/arrow-down.svg';
 import newUserIcon from '../assets/icons/new-user.svg';
@@ -16,7 +14,6 @@ function Menu({onHistoryToggle}) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
     const [selectedText, setSelectedText] = useState(NamesOfNeuralNetworks[0]);
-
 
     const handleItemClick = (index) => {
         setActiveIndex(index);
