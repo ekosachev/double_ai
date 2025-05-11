@@ -1,8 +1,17 @@
 import '../css/Header.css'
 import settingIcon from '../assets/icons/setting.svg';
 import languageIcon from '../assets/icons/language.svg';
+import {useEffect, useState} from "react";
 
 function Header() {
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+            setUser(window.Telegram.WebApp.initDataUnsafe.user);
+        }
+    }, []);
 
     const handleSettingsClick = (e) => {
         e.preventDefault();
@@ -15,6 +24,8 @@ function Header() {
     const handleProfileClick = (e) => {
         e.preventDefault();
     };
+
+    console.log(user)
 
     return (
             <div className="header">
