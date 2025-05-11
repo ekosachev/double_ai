@@ -36,20 +36,22 @@
     line-height: normal;
 }
 
-.history-item{
-    margin-left: 10px;
-}
-
 .history-item a{
+    padding-left: 10px;
     width: 204px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    display: block;
+    display: inline-block;
     color: #000;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 20px;
+}
+.history-item:hover a, .history-item:active a{
+    border-color: black;
 }
