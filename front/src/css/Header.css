@@ -53,19 +53,19 @@
 .languages-list-group{
     width: 130px;
     /*height: 94px;*/
-    border-radius: 6px;
+    border-radius: 6px 0 6px 6px;
     background: #D9D9D9;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     position: absolute;
-    top: 25px;
-    left: -69px;
+    top: 23px;
+    left: -70px;
     padding: 2px 4px 6px 4px;
-    z-index: 99;
+    z-index: 101;
 }
 
-.language{
+.language a{
     margin-bottom: 4px;
     color: #000;
     font-size: 16px;
@@ -78,6 +78,7 @@
     white-space: nowrap;
     width: 125px;
     border: 1px solid transparent;
+    text-decoration: none;
 }
 
 .bg-black{
@@ -91,4 +92,27 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.50);
     display: block;
+    z-index: 100;
+}
+
+.action-group-languages{
+    z-index: 101;
+}
+
+.action-group-languages svg{
+    fill: white;
+}
+
+.svg-fill-black svg{
+    fill: black!important;
+    width: 18px!important;
+    height: 18px!important;
+}
+
+.action-group-languages-bg-2{
+    background: #D9D9D9;
+    z-index: 101;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    padding: 3px;
 }
