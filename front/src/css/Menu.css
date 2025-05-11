@@ -22,7 +22,7 @@
 
 .params-action{
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -37,14 +37,14 @@
 .params-action-active{
     background: #86D9CC;
     color: #000;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .action-list-text {
     background: #86D9CC;
     color: #000;
-    font-size: 12px;
-    width: 74px;
+    font-size: 16px;
+    width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -58,7 +58,7 @@
 }
 
 .list-items{
-    width: 104px;
+    width: 130px;
     /*height: 94px;*/
     border-radius: 6px;
     background: #D9D9D9;
@@ -75,7 +75,7 @@
 .list-item{
     margin-bottom: 4px;
     color: #000;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -83,7 +83,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 96px;
+    width: 125px;
     border: 1px solid transparent;
 }
 .list-item:last-child{
