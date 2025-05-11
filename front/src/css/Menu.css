@@ -9,6 +9,7 @@
 .menu-group-history{
     display: flex;
     align-items: start;
+    cursor: pointer;
 }
 
 .menu-group-params{
