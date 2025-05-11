@@ -10,13 +10,10 @@ import {useState} from "react";
 function Menu({onHistoryToggle}) {
     const NamesOfNeuralNetworks = ['Deepseek V3', 'Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
 
-    const user = tgApp.window.Telegram.WebApp
-
 
     const [activeIndex, setActiveIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
     const [selectedText, setSelectedText] = useState(NamesOfNeuralNetworks[0]);
-
 
     const handleItemClick = (index) => {
         setActiveIndex(index);
