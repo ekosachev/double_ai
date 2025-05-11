@@ -26,6 +26,7 @@
 .header-action-group {
     display: flex;
     gap: 12px;
+    position: relative;
 }
 
 .action-group-profile {
@@ -47,4 +48,47 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+}
+
+.languages-list-group{
+    width: 130px;
+    /*height: 94px;*/
+    border-radius: 6px;
+    background: #D9D9D9;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 25px;
+    left: -69px;
+    padding: 2px 4px 6px 4px;
+    z-index: 99;
+}
+
+.language{
+    margin-bottom: 4px;
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 125px;
+    border: 1px solid transparent;
+}
+
+.bg-black{
+    position: absolute;
+}
+
+.bg-black-color {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.50);
+    display: block;
 }
