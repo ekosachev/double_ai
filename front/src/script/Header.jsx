@@ -25,7 +25,7 @@ function Header() {
         e.preventDefault();
     };
 
-    console.log(user)
+    console.log()
 
     return (
             <div className="header">
