@@ -30,10 +30,14 @@
 
 .history-date{
     color: #737373;
-    font-size: 12px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.history-item{
+    margin-left: 10px;
 }
 
 .history-item a{
@@ -43,7 +47,7 @@
     white-space: nowrap;
     display: block;
     color: #000;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
