@@ -7,10 +7,10 @@ function Dialog() {
         <div className='dialog'>
             <div className="dialog-chat"></div>
             <div className="dialog-input-group">
-                <input type="text" className="input-group-message"/>
-                <div className="input-group-send">
+                <input type="text" className="input-group-message" placeholder='Задать вопрос'/>
+                <a className="input-group-send">
                     <img src={arrowTop} alt="Отправить"/>
-                </div>
+                </a>
             </div>
         </div>
     )
