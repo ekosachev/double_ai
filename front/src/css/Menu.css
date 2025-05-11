@@ -79,9 +79,9 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
     white-space: nowrap;
     width: 96px;
     border: 1px solid transparent;
