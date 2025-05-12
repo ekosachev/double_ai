@@ -1,6 +1,5 @@
 import '../css/Header.css'
 import settingIcon from '../assets/icons/setting.svg';
-import languageIcon from '../assets/icons/language.svg';
 import {useEffect, useState} from "react";
 
 function Header() {
@@ -29,8 +28,6 @@ function Header() {
     const handleProfileClick = (e) => {
         e.preventDefault();
     };
-
-    console.log()
 
     return (
         <div className="header">
@@ -75,7 +72,8 @@ function Header() {
                         </div>
                     )}
                     <a href="#" className="action-group-profile" onClick={handleProfileClick}>
-                        <div className="profile-text" id="profile-text">ЛВ</div>
+                        {/*<div className="profile-text" id="profile-text">ЛВ</div>*/}
+                        <img src={user.photo_url} alt="Фото профиля"/>
                     </a>
                 </div>
             </div>
