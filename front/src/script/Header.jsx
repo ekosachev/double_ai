@@ -73,7 +73,12 @@ function Header() {
                     )}
                     <a href="#" className="action-group-profile" onClick={handleProfileClick}>
                         {/*<div className="profile-text" id="profile-text">ЛВ</div>*/}
-                        <img src={user.photo_url?.[0]} alt="Фото профиля"/>
+                        {user?.photo_url ? (<img src={user.photo_url} alt="Фото профиля"/>)
+                            : (<div className="profile-text">
+                                {user?.first_name?.[0]}
+                                {user?.last_name?.[0]}
+                            </div>)
+                        }
                     </a>
                 </div>
             </div>
