@@ -84,6 +84,10 @@ class OpenRouterAPI:
             self.logger.error(f"{error_response.code}: {error_response.message}")
             return None
 
+        if response_json["choices"][0].get("error") is not None:
+            self.logger.error("Recieved error reposnse from LLM")
+            return None
+
         success_response = schemas.ChatCompletionResponse.model_validate(response_json)
         self.logger.info(json.dumps(success_response.model_dump(mode="json")))
         completion_choises = success_response.choices
