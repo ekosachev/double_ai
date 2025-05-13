@@ -11,84 +11,63 @@ export const DialogueProvider = ({children}) => {
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const startNewDialogue = async (model) => {
-        try {
-            setIsLoading(true);
-            const dialogue = await createDialogue([{
-                name: `Диалог ${new Date().toLocaleString()}`,
-                model: model,
-                creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
-            }]);
-
-            const branch = await createBranch([{
-                dialogue_id: dialogue[0].id,
-                name: 'Основная ветка',
-                creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
-            }]);
-
-            setCurrentDialogue(dialogue);
-            setCurrentBranch(branch);
-            setMessages([]);
-            return {dialogue, branch};
-        } catch (error) {
-            console.error('Ошибка создания диалога:', error);
-            throw error;
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     const sendMessage = async (messageText) => {
-        if (!currentDialogue[0] || !currentBranch[0]) {
-            await startNewDialogue(selectedModel);
-        }
+        if (!messageText.trim()) return null;
 
         try {
             setIsLoading(true);
+
+            let branchId;
+            let newDialogue, newBranch;
+
+            if (!currentDialogue[0] || !currentBranch[0]) {
+                [newDialogue] = await createDialogue([{
+                    name: `Диалог ${new Date().toLocaleString()}`,
+                    model: selectedModel,
+                    creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
+                }]);
+
+                [newBranch] = await createBranch([{
+                    dialogue_id: newDialogue.id,
+                    name: 'Основная ветка',
+                    creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
+                }]);
+
+                setCurrentDialogue([newDialogue]);
+                setCurrentBranch([newBranch]);
+                branchId = newBranch.id;
+            } else {
+                branchId = currentBranch[0].id;
+            }
 
             const [newMessage] = await createMessage([{
                 user_message: messageText,
                 model_response: '',
-                branch_id: currentBranch[0].id,
-                previous_message_id: messages.length > 0 ? messages[messages.length - 1]?.id : null,
+                branch_id: branchId,
+                previous_message_id: messages.length > 0 ? messages[messages.length-1]?.id : null,
                 timestamp: new Date().toISOString()
             }]);
 
-            console.log('Отправленное сообщение:', newMessage);
-
-            if (!newMessage?.id) {
-                throw new Error('Неверный формат ответа сервера');
-            }
-
-            setMessages(prev => [...prev, {
-                id: newMessage.id,
-                user_message: messageText,
-                model_response: '',
-                timestamp: new Date().toISOString()
-            }]);
+            setMessages(prev => [...prev, newMessage]);
 
             const [botResponse] = await waitForBotResponse(newMessage.id);
-            console.log('Ответ нейросети:', botResponse);
 
-            if (!botResponse?.model_response) {
-                throw new Error('Пустой ответ от нейросети');
-            }
+            setMessages(prev => prev.map(msg =>
+                msg.id === newMessage.id
+                    ? { ...msg, model_response: botResponse.model_response }
+                    : msg
+            ));
 
-            setMessages(prev => {
-                const updated = [...prev];
-                const lastMessage = updated[updated.length - 1];
-                if (lastMessage.id === newMessage.id) {
-                    updated[updated.length - 1] = {
-                        ...lastMessage,
-                        model_response: botResponse.model_response
-                    };
-                }
-                return updated;
-            });
+            return {
+                dialogue: newDialogue || currentDialogue[0],
+                branch: newBranch || currentBranch[0],
+                message: newMessage,
+                botResponse
+            };
 
-            return botResponse;
         } catch (error) {
-            console.error('Ошибка отправки сообщения:', error);
+            console.error('Ошибка отправки:', error);
             throw error;
         } finally {
             setIsLoading(false);
@@ -120,7 +99,6 @@ export const DialogueProvider = ({children}) => {
             isLoading,
             selectedModel,
             setSelectedModel,
-            startNewDialogue,
             sendMessage,
             setCurrentDialogue,
             setCurrentBranch

@@ -18,13 +18,15 @@ function Dialog() {
     }, [messages]);
 
     const handleSend = async () => {
-        if (inputValue.trim()) {
-            try {
-                await sendMessage(inputValue);
+        if (!inputValue.trim()) return;
+
+        try {
+            const result = await sendMessage(inputValue);
+            if (result) {
                 setInputValue('');
-            } catch (error) {
-                console.error('Ошибка отправки сообщения:', error);
             }
+        } catch (error) {
+            console.error('Не удалось отправить сообщение:', error);
         }
     };
 
