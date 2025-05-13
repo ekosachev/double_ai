@@ -1,6 +1,7 @@
 import '../css/Header.css'
 import settingIcon from '../assets/icons/setting.svg';
 import {useEffect, useState} from "react";
+import {changeLanguage} from "i18next";
 
 function Header() {
 
@@ -32,7 +33,7 @@ function Header() {
     return (
         <div className="header">
             <div className="container">
-                <div className="bg-black"></div>
+                <div className="bg-black" onClick={(e) => handleLanguagesClick(e)}></div>
                 <div className="header-logo-group">
                     <img src="../../public/logo.svg" alt="Логотип" className="logo-group-image"/>
                     <div className="logo-group-text">Double AI</div>
@@ -63,10 +64,10 @@ function Header() {
                         <div className="languages-list-group">
                             <ul>
                                 <li className="language">
-                                    <a href="#">Русский</a>
+                                    <a href="#" onClick={(e) => {changeLanguage ("ru"); handleLanguagesClick(e);}}>Русский</a>
                                 </li>
                                 <li className="language">
-                                    <a href="#">English</a>
+                                    <a href="#" onClick={(e) => {changeLanguage ("en"); handleLanguagesClick(e);}}>English</a>
                                 </li>
                             </ul>
                         </div>
