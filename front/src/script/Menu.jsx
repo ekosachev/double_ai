@@ -10,8 +10,8 @@ import { useDialogue } from './DialogueContext';
 function Menu({ onHistoryToggle, onPromptOpen }) {
     const { t } = useTranslation();
     const { selectedModel, setSelectedModel, startNewDialogue } = useDialogue();
-
-    const availableModels = ['DeepSeek V3', 'Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
+    /*'DeepSeek V3',*/
+    const availableModels = ['Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
     const [isModelListVisible, setIsModelListVisible] = useState(false);
     const [isAddUserVisible, setIsAddUserVisible] = useState(false);
 
