@@ -76,12 +76,15 @@ class OpenRouterAPI:
             self.logger.error(e)
             return None
         response_json = response.json()
-        self.logger.info(json.dumps(response_json))
+        # self.logger.info(json.dumps(response_json))
         error_json = response_json.get("error", None)
         if error_json is not None:
             error_response = schemas.ErrorResponse.model_validate(error_json)
             self.logger.error("Encountered error while generating response")
             self.logger.error(f"{error_response.code}: {error_response.message}")
+            return None
+
+        if response_json["choices"].get("error") is not None:
             return None
 
         success_response = schemas.ChatCompletionResponse.model_validate(response_json)
