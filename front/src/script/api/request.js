@@ -8,18 +8,19 @@ export async function getRequest(path) {
                 'Content-Type': 'application/json',
             }
         });
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const answer = await response.json();
-        return answer;
+        return await response.json();
     } catch (error) {
-        console.log('Ошибка запроса: ' + error);
+        console.error('Ошибка GET запроса:', error);
+        throw error;
     }
 }
 
-export async function postRequest(path, body) {
+export async function postRequest(path, body = {}) {
     try {
         const response = await fetch(server + path, {
             method: 'POST',
@@ -27,11 +28,15 @@ export async function postRequest(path, body) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(body)
-        })
-        const result = await response.json();
-        return result.json();
-    }
-    catch (error) {
-        console.log('Ошибка запроса: ' + error);
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Ошибка POST запроса:', error);
+        throw error;
     }
 }
