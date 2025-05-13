@@ -11,7 +11,7 @@ function Menu({ onHistoryToggle, onPromptOpen }) {
     const { t } = useTranslation();
     const { selectedModel, setSelectedModel, startNewDialogue } = useDialogue();
 
-    const availableModels = ['Deepseek V3', 'Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
+    const availableModels = {'Deepseek V3' : 4, 'Microsoft Phi 4 Reasoning' : 0, 'Quen 3': 1, 'InternVL3' : 2, 'Llama 3.3 Nemotron Super' : 3};
     const [isModelListVisible, setIsModelListVisible] = useState(false);
     const [isAddUserVisible, setIsAddUserVisible] = useState(false);
 
@@ -64,10 +64,14 @@ function Menu({ onHistoryToggle, onPromptOpen }) {
                         {isModelListVisible && (
                             <div className="list-items">
                                 <ul>
-                                    {availableModels.map((model, index) => (
-                                        <li key={index}
-                                            className={`list-item ${model === selectedModel ? 'list-item-active' : ''}`}
-                                            onClick={() => handleModelSelect(model)}>
+                                    {Object.keys(availableModels).map((model) => (
+                                        <li
+                                            key={model}
+                                            className={`list-item ${
+                                                model === selectedModel ? 'list-item-active' : ''
+                                            }`}
+                                            onClick={() => handleModelSelect(availableModels[model])}
+                                        >
                                             {model}
                                         </li>
                                     ))}

@@ -11,17 +11,17 @@ export const DialogueProvider = ({ children }) => {
 
     const startNewDialogue = async (model) => {
         try {
-            const dialogue = await createDialogue({
+            const dialogue = await createDialogue([{
                 name: `Диалог ${new Date().toLocaleString()}`,
                 model,
                 creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
-            });
+            }]);
 
-            const branch = await createBranch({
+            const branch = await createBranch([{
                 dialogue_id: dialogue.id,
                 name: 'Основная ветка',
                 creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
-            });
+            }]);
 
             setCurrentDialogue(dialogue);
             setCurrentBranch(branch);
@@ -39,12 +39,12 @@ export const DialogueProvider = ({ children }) => {
         }
 
         try {
-            const newMessage = await createMessage({
+            const newMessage = await createMessage([{
                 user_message: messageText,
                 branch_id: currentBranch.id,
                 previous_message_id: messages.length > 0 ? messages[messages.length-1].id : null,
                 timestamp: new Date().toISOString()
-            });
+            }]);
 
             setMessages([...messages, newMessage]);
             return newMessage;
