@@ -10,7 +10,6 @@ double-ai.ru {
 	tls /etc/caddy/cert/double-ai.ru.crt /etc/caddy/cert/double-ai.ru.key
 
 	handle_path /backend* {
-		uri strip_prefix /backend
 		reverse_proxy backend:8000
 	}
 
