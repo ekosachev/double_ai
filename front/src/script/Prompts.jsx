@@ -1,20 +1,23 @@
 import '../css/Prompts.css';
-import backMainIcon from '../assets/icons/back-main.svg'
-import arrowDownIcon from '../assets/icons/arrow-down.svg'
+import backMainIcon from '../assets/icons/back-main.svg';
+import arrowDownIcon from '../assets/icons/arrow-down.svg';
 import translations from '../assets/json/prompt.json';
-import {useInput} from "./InputContext.jsx";
+import { useInput } from "./InputContext.jsx";
+import { useTranslation } from 'react-i18next';
 
-import {useTranslation} from 'react-i18next';
-
-function Prompts({isOpen, onClose}) {
-
-    const {t, i18n} = useTranslation();
+function Prompts({ isOpen, onClose }) {
+    const { t, i18n } = useTranslation();
     const currentLanguage = i18n.language;
     const categories = translations[currentLanguage]?.category || {};
-    const {setDescription} = useInput();
+    const { inputValue, setInputValue } = useInput(); // Добавляем inputValue
 
     const handleItemClick = (description) => {
-        setDescription(description); // Теперь это вызовет перерендер
+        // Если поле уже содержит текст, добавляем пробел перед промтом
+        const newValue = inputValue
+            ? `${inputValue}\n${description}`
+            : description;
+
+        setInputValue(newValue);
         onClose();
     };
 
@@ -37,15 +40,12 @@ function Prompts({isOpen, onClose}) {
                     {Object.entries(categories).map(([categoryKey, categoryData]) => (
                         <div key={categoryKey} className="category-block">
                             <h2 className="category-title">{categoryData.title}</h2>
-
                             <div className="items-container">
                                 {Object.entries(categoryData.items).map(([itemId, itemData]) => (
                                     <div
                                         key={itemId}
                                         className="item-card"
-                                        onClick={() => {
-                                            handleItemClick(itemData.description)
-                                        }}
+                                        onClick={() => handleItemClick(itemData.description)}
                                     >
                                         <div className="mini-name">{itemData['mini-name']}</div>
                                         <div className="description">{itemData.description}</div>
@@ -57,7 +57,7 @@ function Prompts({isOpen, onClose}) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Prompts
+export default Prompts;
