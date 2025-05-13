@@ -57,7 +57,7 @@ export const DialogueProvider = ({children}) => {
 
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            const botResponse = await waitForBotResponse(newMessage.id);
+            const botResponse = await waitForBotResponse(newMessage[0].id);
 
             return botResponse;
         } catch (error) {
