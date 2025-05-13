@@ -6,19 +6,19 @@ const DialogueContext = createContext();
 export const DialogueProvider = ({ children }) => {
     const [currentDialogue, setCurrentDialogue] = useState(null);
     const [currentBranch, setCurrentBranch] = useState(null);
-    const [selectedModel, setSelectedModel] = useState('Deepseek V3');
+    const [selectedModel, setSelectedModel] = useState('DeepSeek V3');
     const [messages, setMessages] = useState([]);
 
     const startNewDialogue = async (model) => {
         try {
             const dialogue = await createDialogue([{
                 name: `Диалог ${new Date().toLocaleString()}`,
-                model,
+                model: model,
                 creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
             }]);
 
             const branch = await createBranch([{
-                dialogue_id: dialogue.id,
+                dialogue_id: dialogue[0].id,
                 name: 'Основная ветка',
                 creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
             }]);
@@ -41,7 +41,8 @@ export const DialogueProvider = ({ children }) => {
         try {
             const newMessage = await createMessage([{
                 user_message: messageText,
-                branch_id: currentBranch.id,
+                model_response: '',
+                branch_id: currentBranch[0].id,
                 previous_message_id: messages.length > 0 ? messages[messages.length-1].id : null,
                 timestamp: new Date().toISOString()
             }]);

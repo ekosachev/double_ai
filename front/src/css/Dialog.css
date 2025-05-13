@@ -44,6 +44,11 @@
     line-height: normal;
 }
 
+.input-group-send {
+    background-color: transparent;
+    border: none;
+}
+
 .input-group-send img {
     height: 30px;
     width: 30px;
