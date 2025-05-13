@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from 'react';
-import { createDialogue, createBranch, createMessage } from './api/apiRequests.js';
+import { createDialogue, createBranch, createMessage } from './api/apiPostRequest.js';
 
 const DialogueContext = createContext();
 
@@ -42,7 +42,8 @@ export const DialogueProvider = ({ children }) => {
             const newMessage = await createMessage({
                 user_message: messageText,
                 branch_id: currentBranch.id,
-                previous_message_id: messages.length > 0 ? messages[messages.length-1].id : null
+                previous_message_id: messages.length > 0 ? messages[messages.length-1].id : null,
+                timestamp: new Date().toISOString()
             });
 
             setMessages([...messages, newMessage]);

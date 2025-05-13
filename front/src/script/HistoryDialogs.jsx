@@ -1,7 +1,7 @@
 import "../css/HistoryDialogs.css";
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getDialogue, getMessages} from './api/apiRequests.js';
+import { getDialogue, getMessages} from './api/apiGetRequests.js';
 
 function HistoryDialogs({ isOpen, onClose }) {
     const { t } = useTranslation();

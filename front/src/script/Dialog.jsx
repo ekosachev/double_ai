@@ -8,13 +8,25 @@ import { useEffect, useRef } from 'react';
 function Dialog() {
     const { t } = useTranslation();
     const { messages } = useDialogue();
-    const { inputValue, setInputValue, isFocused, setIsFocused, handleSend } = useInput();
+    const { inputValue, setInputValue, isFocused, setIsFocused } = useInput();
+    const { sendMessage } = useDialogue();
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
+
+    const handleSend = async () => {
+        if (inputValue.trim()) {
+            try {
+                await sendMessage(inputValue);
+                setInputValue('');
+            } catch (error) {
+                console.error('Ошибка отправки сообщения:', error);
+            }
+        }
+    };
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
