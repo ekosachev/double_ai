@@ -6,14 +6,22 @@ import newUserIcon from '../assets/icons/new-user.svg';
 import newChatIcon from '../assets/icons/new-chat.svg';
 
 import {useState} from "react";
+import {useTranslation} from 'react-i18next';
+// import { useInput } from "./InputContext.jsx";
 
-function Menu({onHistoryToggle}) {
+function Menu({onHistoryToggle, onPromptOpen}) {
     const NamesOfNeuralNetworks = ['Deepseek V3', 'Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
 
-
+    const {t} = useTranslation();
     const [activeIndex, setActiveIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
+    const [isVisibleAdduser, setIsVisibleAddUser] = useState(true);
     const [selectedText, setSelectedText] = useState(NamesOfNeuralNetworks[0]);
+    // const { description } = useInput();
+
+    // if (description != null && description.length > 0) {
+    //     document.getElementsByClassName('params-action params-action-disable')[0].classList.replace('params-action-disable', 'params-action-active' );
+    // }
 
     const handleItemClick = (index) => {
         setActiveIndex(index);
@@ -21,16 +29,36 @@ function Menu({onHistoryToggle}) {
         setIsVisible(false); // Закрываем список после выбора
     };
 
+    const handleAddUserClick = (e) => {
+        e.preventDefault();
+        setIsVisibleAddUser(!isVisibleAdduser);
+    }
+
+    const addUserID = (e) => {
+        e.preventDefault();
+        setIsVisibleAddUser(!isVisibleAdduser);
+    }
+
     return (
         <div className="menu-group">
             <div className="container">
+                {!isVisibleAdduser && <div className="bg-black-add-user" onClick={(e) => {
+                    e.preventDefault();
+                    setIsVisibleAddUser(!isVisibleAdduser)
+                }}></div>}
                 <div className="menu-group-history" onClick={onHistoryToggle}>
                     <img src={menuIcon} alt="История"/>
                 </div>
                 <div className="menu-group-params">
-                    <a href="#" className="params-action params-action-disable">Короче</a>
-                    <a href="#" className="params-action params-action-active">Стандартно</a>
-                    <a href="#" className="params-action params-action-disable">Подробнее</a>
+                    {!isVisibleAdduser && (<div className="user-add">
+                        <input type="text" className="input-id-user" placeholder={t('menu.addUser.input')}/>
+                        <div className="push-user-id">
+                            <a href="#" onClick={addUserID}>{t('menu.addUser.add')}</a>
+                        </div>
+                    </div>)}
+                    <a href="#" className="params-action params-action-disable">{t('menu.short')}</a>
+                    <a href="#" className="params-action params-action-active">{t('menu.standard')}</a>
+                    <a href="#" className="params-action params-action-disable">{t('menu.detail')}</a>
                     <a
                         href="#"
                         className="params-action params-action-active action-list"
@@ -58,10 +86,10 @@ function Menu({onHistoryToggle}) {
                             </div>
                         )}
                     </a>
-                    <a href="#" className="params-action params-action-disable">Промт</a>
+                    <a href="#" className="params-action params-action-disable" onClick={onPromptOpen}>{t('menu.prompt')}</a>
                 </div>
                 <div className="menu-group-append">
-                    <a href="#" className="append-user">
+                    <a href="#" className="append-user" onClick={handleAddUserClick}>
                         <img src={newUserIcon} alt="Добавить пользователя"/>
                     </a>
                     <a href="#" className="append-chat">

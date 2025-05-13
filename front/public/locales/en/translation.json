@@ -1,0 +1,27 @@
+{
+  "menu": {
+    "short": "Short",
+    "standard": "Standard",
+    "detail": "Detail",
+    "prompt": "Prompt",
+    "addUser": {
+      "input": "Enter the user's ID",
+      "add": "Add"
+    }
+  },
+  "dialog": {
+    "input": "Ask a question"
+  },
+
+  "history": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "week": "7 days",
+    "2week": "14 days",
+    "month": "30 days"
+  },
+
+  "prompts": {
+    "header": "Assign a prompt"
+  }
+}

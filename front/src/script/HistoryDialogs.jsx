@@ -1,7 +1,10 @@
 import "../css/HistoryDialogs.css";
 import {useEffect} from 'react';
+import { useTranslation } from 'react-i18next';
 
 function HistoryDialogs({isOpen, onClose}) {
+
+    const { t } = useTranslation();
 
     const handleClickOutside = (e) => {
         if (e.target.classList.contains('bg')) {
@@ -24,7 +27,7 @@ function HistoryDialogs({isOpen, onClose}) {
     if (!isOpen) return null;
 
     const NamesOfChats = {
-        "10.05.2025": ["Chat1", "Chat2"],
+        "10.05.2025": ["Chat1"],
         "9.05.2025": ["Chat3"],
         "1.03.2025": ["Chat4"],
         "11.05.2025": ["Chat5"],
@@ -93,7 +96,7 @@ function HistoryDialogs({isOpen, onClose}) {
                 {/* Сегодня */}
                 {groupedChats["Сегодня"].length > 0 && (
                     <div className="history-date-group">
-                        <div className="history-date">Сегодня</div>
+                        <div className="history-date">{t('history.today')}</div>
                         {groupedChats["Сегодня"].map(({chat}, index) => (
                             <div key={`today-${index}`} className="history-item" onClick={onClose}>
                                 <a href="#">{chat}</a>
@@ -105,7 +108,7 @@ function HistoryDialogs({isOpen, onClose}) {
                 {/* Вчера */}
                 {groupedChats["Вчера"].length > 0 && (
                     <div className="history-date-group">
-                        <div className="history-date">Вчера</div>
+                        <div className="history-date">{t('history.yesterday')}</div>
                         {groupedChats["Вчера"].map(({chat}, index) => (
                             <div key={`yesterday-${index}`} className="history-item" onClick={onClose}>
                                 <a href="#">{chat}</a>
@@ -117,7 +120,7 @@ function HistoryDialogs({isOpen, onClose}) {
                 {/* 7 дней */}
                 {groupedChats["7 дней"].length > 0 && (
                     <div className="history-date-group">
-                        <div className="history-date">7 дней</div>
+                        <div className="history-date">{t('history.week')}</div>
                         {groupedChats["7 дней"].map(({chat}, index) => (
                             <div key={`7days-${index}`} className="history-item" onClick={onClose}>
                                 <a href="#">{chat}</a>
@@ -129,7 +132,7 @@ function HistoryDialogs({isOpen, onClose}) {
                 {/* 14 дней */}
                 {groupedChats["14 дней"].length > 0 && (
                     <div className="history-date-group">
-                        <div className="history-date">14 дней</div>
+                        <div className="history-date">{t('history.2week')}</div>
                         {groupedChats["14 дней"].map(({chat}, index) => (
                             <div key={`14days-${index}`} className="history-item" onClick={onClose}>
                                 <a href="#">{chat}</a>
@@ -141,7 +144,7 @@ function HistoryDialogs({isOpen, onClose}) {
                 {/* 30 дней */}
                 {groupedChats["30 дней"].length > 0 && (
                     <div className="history-date-group">
-                        <div className="history-date">Последние 30 дней</div>
+                        <div className="history-date">{t('history.month')}</div>
                         {groupedChats["30 дней"].map(({chat}, index) => (
                             <div key={`30days-${index}`} className="history-item" onClick={onClose}>
                                 <a href="#">{chat}</a>

@@ -67,8 +67,8 @@
     position: absolute;
     top: 23px;
     left: -70px;
-    padding: 2px 4px 6px 4px;
-    z-index: 101;
+    padding: 2px 4px 0 4px;
+    z-index: 104;
 }
 
 .language a{
@@ -84,7 +84,12 @@
     white-space: nowrap;
     width: 125px;
     border: 1px solid transparent;
+    border-radius: 20px;
     text-decoration: none;
+    padding-left: 10px;
+}
+.language:hover a, .language :active a{
+    border-color: black;
 }
 
 .bg-black{
@@ -98,11 +103,11 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.50);
     display: block;
-    z-index: 100;
+    z-index: 104;
 }
 
 .action-group-languages{
-    z-index: 101;
+    z-index: 104;
 }
 
 .action-group-languages svg{
@@ -117,7 +122,7 @@
 
 .action-group-languages-bg-2{
     background: #D9D9D9;
-    z-index: 101;
+    z-index: 105;
     border-top-right-radius: 50%;
     border-top-left-radius: 50%;
     padding: 3px;
