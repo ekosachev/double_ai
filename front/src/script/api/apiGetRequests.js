@@ -7,3 +7,4 @@ export const getBranch = () => getRequest('/branch/');
 export const getBranchById = (id) => getRequest(`/branch/${id}`);
 
 export const getMessages = (branchId) => getRequest(`/branch/${branchId}/messages`);
+export const getMessageById = (id) => getRequest(`/message/${id}`);

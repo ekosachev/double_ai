@@ -7,7 +7,7 @@ import {useEffect, useRef} from 'react';
 
 function Dialog() {
     const {t} = useTranslation();
-    const {messages} = useDialogue();
+    const {messages, isLoading} = useDialogue();
     const {inputValue, setInputValue, isFocused, setIsFocused} = useInput();
     const {sendMessage} = useDialogue();
     const messagesEndRef = useRef(null);
@@ -38,119 +38,131 @@ function Dialog() {
     return (
         <div className='dialog'>
             <div className="dialog-chat">
-                {/*{messages.map((message, index) => (*/}
-                {/*    <div key={index} className="dialog-message">*/}
-                {/*        <div className="message-user">{message.user_message}</div>*/}
-                {/*        {message.model_response && (*/}
-                {/*            <div className="message-bot">*/}
-                {/*                <div className="chat-neural-decoration">*/}
-                {/*                    <img src="../../public/logo.svg" alt="Логотип"/>*/}
-                {/*                    <div className="neural-decoration-text">Double AI</div>*/}
-                {/*                </div>*/}
-                {/*                <div className="chat-neural-text">{message.model_response}</div>*/}
-                {/*            </div>*/}
-                {/*        )}*/}
+                {messages.map((message, index) => (
+                    <div key={index} className="dialog-message">
+                        {message.user_message && (
+                            <div className="message-user">{message.user_message}</div>
+                        )}
+                        {message.model_response && (
+                            <div className="message-bot">
+                                <div className="chat-neural-decoration">
+                                    <img src="../../public/logo.svg" alt="Логотип"/>
+                                    <div className="neural-decoration-text">Double AI</div>
+                                </div>
+                                <div className="chat-neural-text">{message.model_response}</div>
+                            </div>
+                        )}
+                    </div>
+                ))}
+                {isLoading && (
+                    <div className="message-bot">
+                        <div className="chat-neural-decoration">
+                            <img src="../../public/logo.svg" alt="Логотип"/>
+                            <div className="neural-decoration-text">Double AI</div>
+                        </div>
+                        <div className="chat-neural-text loading-dots">Генерация ответа</div>
+                    </div>
+                )}
+                <div ref={messagesEndRef}/>
+                {/*<div className="dialog-message">*/}
+                {/*    <p className="message-user">Тестовое сообщения*/}
+                {/*        пользователя;*/}
+                {/*    </p>*/}
+                {/*    <div className="message-bot">*/}
+                {/*        <div className="chat-neural-decoration">*/}
+                {/*            <img src="../../public/logo.svg" alt="Логотип"/>*/}
+                {/*            <div className="neural-decoration-text">Double AI</div>*/}
+                {/*        </div>*/}
+                {/*        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*        </div>*/}
                 {/*    </div>*/}
-                {/*))}*/}
-                <div className="dialog-message">
-                    <p className="message-user">Тестовое сообщения
-                        пользователя;
-                    </p>
-                    <div className="message-bot">
-                        <div className="chat-neural-decoration">
-                            <img src="../../public/logo.svg" alt="Логотип"/>
-                            <div className="neural-decoration-text">Double AI</div>
-                        </div>
-                        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                        </div>
-                    </div>
-                </div>
-                <div className="dialog-message">
-                    <p className="message-user">Тестовое сообщения
-                        пользователя;
-                    </p>
-                    <div className="message-bot">
-                        <div className="chat-neural-decoration">
-                            <img src="../../public/logo.svg" alt="Логотип"/>
-                            <div className="neural-decoration-text">Double AI</div>
-                        </div>
-                        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                        </div>
-                    </div>
-                </div>
-                <div className="dialog-message">
-                    <p className="message-user">Тестовое сообщения
-                        пользователя;
-                    </p>
-                    <div className="message-bot">
-                        <div className="chat-neural-decoration">
-                            <img src="../../public/logo.svg" alt="Логотип"/>
-                            <div className="neural-decoration-text">Double AI</div>
-                        </div>
-                        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                        </div>
-                    </div>
-                </div>
-                <div className="dialog-message">
-                    <p className="message-user">Тестовое сообщения
-                        пользователя;
-                    </p>
-                    <div className="message-bot">
-                        <div className="chat-neural-decoration">
-                            <img src="../../public/logo.svg" alt="Логотип"/>
-                            <div className="neural-decoration-text">Double AI</div>
-                        </div>
-                        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                        </div>
-                    </div>
-                </div>
-                <div className="dialog-message">
-                    <p className="message-user">Тестовое сообщения
-                        пользователя;
-                    </p>
-                    <div className="message-bot">
-                        <div className="chat-neural-decoration">
-                            <img src="../../public/logo.svg" alt="Логотип"/>
-                            <div className="neural-decoration-text">Double AI</div>
-                        </div>
-                        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                        </div>
-                    </div>
-                </div>
-                <div className="dialog-message">
-                    <p className="message-user">Тестовое сообщения
-                        пользователя;
-                    </p>
-                    <div className="message-bot">
-                        <div className="chat-neural-decoration">
-                            <img src="../../public/logo.svg" alt="Логотип"/>
-                            <div className="neural-decoration-text">Double AI</div>
-                        </div>
-                        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                        </div>
-                    </div>
-                </div>
-                <div className="dialog-message">
-                    <p className="message-user">Тестовое сообщения
-                        пользователя;
-                    </p>
-                    <div className="message-bot">
-                        <div className="chat-neural-decoration">
-                            <img src="../../public/logo.svg" alt="Логотип"/>
-                            <div className="neural-decoration-text">Double AI</div>
-                        </div>
-                        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;
-                        </div>
-                    </div>
-                </div>
-                {/*<div/>*/}
+                {/*</div>*/}
+                {/*<div className="dialog-message">*/}
+                {/*    <p className="message-user">Тестовое сообщения*/}
+                {/*        пользователя;*/}
+                {/*    </p>*/}
+                {/*    <div className="message-bot">*/}
+                {/*        <div className="chat-neural-decoration">*/}
+                {/*            <img src="../../public/logo.svg" alt="Логотип"/>*/}
+                {/*            <div className="neural-decoration-text">Double AI</div>*/}
+                {/*        </div>*/}
+                {/*        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className="dialog-message">*/}
+                {/*    <p className="message-user">Тестовое сообщения*/}
+                {/*        пользователя;*/}
+                {/*    </p>*/}
+                {/*    <div className="message-bot">*/}
+                {/*        <div className="chat-neural-decoration">*/}
+                {/*            <img src="../../public/logo.svg" alt="Логотип"/>*/}
+                {/*            <div className="neural-decoration-text">Double AI</div>*/}
+                {/*        </div>*/}
+                {/*        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className="dialog-message">*/}
+                {/*    <p className="message-user">Тестовое сообщения*/}
+                {/*        пользователя;*/}
+                {/*    </p>*/}
+                {/*    <div className="message-bot">*/}
+                {/*        <div className="chat-neural-decoration">*/}
+                {/*            <img src="../../public/logo.svg" alt="Логотип"/>*/}
+                {/*            <div className="neural-decoration-text">Double AI</div>*/}
+                {/*        </div>*/}
+                {/*        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className="dialog-message">*/}
+                {/*    <p className="message-user">Тестовое сообщения*/}
+                {/*        пользователя;*/}
+                {/*    </p>*/}
+                {/*    <div className="message-bot">*/}
+                {/*        <div className="chat-neural-decoration">*/}
+                {/*            <img src="../../public/logo.svg" alt="Логотип"/>*/}
+                {/*            <div className="neural-decoration-text">Double AI</div>*/}
+                {/*        </div>*/}
+                {/*        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className="dialog-message">*/}
+                {/*    <p className="message-user">Тестовое сообщения*/}
+                {/*        пользователя;*/}
+                {/*    </p>*/}
+                {/*    <div className="message-bot">*/}
+                {/*        <div className="chat-neural-decoration">*/}
+                {/*            <img src="../../public/logo.svg" alt="Логотип"/>*/}
+                {/*            <div className="neural-decoration-text">Double AI</div>*/}
+                {/*        </div>*/}
+                {/*        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className="dialog-message">*/}
+                {/*    <p className="message-user">Тестовое сообщения*/}
+                {/*        пользователя;*/}
+                {/*    </p>*/}
+                {/*    <div className="message-bot">*/}
+                {/*        <div className="chat-neural-decoration">*/}
+                {/*            <img src="../../public/logo.svg" alt="Логотип"/>*/}
+                {/*            <div className="neural-decoration-text">Double AI</div>*/}
+                {/*        </div>*/}
+                {/*        <div className="chat-neural-text">Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*            Тестовое сообщение нейронки; Тестовое сообщение нейронки; Тестовое сообщение нейронки;*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                <div/>
             </div>
 
             <div className={`dialog-input-group ${isFocused ? 'focused' : ''}`}>
@@ -164,7 +176,9 @@ function Dialog() {
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                 />
-                <button className="input-group-send" onClick={handleSend}>
+                <button className="input-group-send"
+                        onClick={handleSend}
+                        disabled={isLoading}>
                     <img src={arrowTop} alt="Отправить"/>
                 </button>
             </div>

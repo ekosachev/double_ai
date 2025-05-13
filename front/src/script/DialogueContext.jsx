@@ -1,16 +1,19 @@
-import { createContext, useState, useContext } from 'react';
-import { createDialogue, createBranch, createMessage } from './api/apiPostRequest.js';
+import {createContext, useState, useContext} from 'react';
+import {createDialogue, createBranch, createMessage} from './api/apiPostRequest.js';
+import {getMessageById} from './api/apiGetRequests.js';
 
 const DialogueContext = createContext();
 
-export const DialogueProvider = ({ children }) => {
+export const DialogueProvider = ({children}) => {
     const [currentDialogue, setCurrentDialogue] = useState(null);
     const [currentBranch, setCurrentBranch] = useState(null);
     const [selectedModel, setSelectedModel] = useState('DeepSeek V3');
     const [messages, setMessages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const startNewDialogue = async (model) => {
         try {
+            setIsLoading(true);
             const dialogue = await createDialogue([{
                 name: `Диалог ${new Date().toLocaleString()}`,
                 model: model,
@@ -26,10 +29,12 @@ export const DialogueProvider = ({ children }) => {
             setCurrentDialogue(dialogue);
             setCurrentBranch(branch);
             setMessages([]);
-            return { dialogue, branch };
+            return {dialogue, branch};
         } catch (error) {
             console.error('Ошибка создания диалога:', error);
             throw error;
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -39,20 +44,45 @@ export const DialogueProvider = ({ children }) => {
         }
 
         try {
+            setIsLoading(true);
             const newMessage = await createMessage([{
                 user_message: messageText,
                 model_response: '',
                 branch_id: currentBranch[0].id,
-                previous_message_id: messages.length > 0 ? messages[messages.length-1].id : null,
+                previous_message_id: messages.length > 0 ? messages[messages.length - 1].id : null,
                 timestamp: new Date().toISOString()
             }]);
 
-            setMessages([...messages, newMessage]);
-            return newMessage;
+            setMessages(prev => [...prev, newMessage]);
+
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            const botResponse = await waitForBotResponse(newMessage.id);
+
+            return botResponse;
         } catch (error) {
             console.error('Ошибка отправки сообщения:', error);
             throw error;
+        } finally {
+            setIsLoading(false);
         }
+    };
+    const waitForBotResponse = async (messageId, attempts = 10, delay = 1000) => {
+        for (let i = 0; i < attempts; i++) {
+            try {
+                const response = await getMessageById(messageId);
+
+                if (response.model_response) {
+                    return response;
+                }
+            } catch (error) {
+                console.error(`Ошибка при получении сообщения ${messageId}:`, error);
+            }
+
+            await new Promise(resolve => setTimeout(resolve, delay));
+        }
+
+        throw new Error('Не удалось получить ответ нейросети');
     };
 
     return (
@@ -60,6 +90,7 @@ export const DialogueProvider = ({ children }) => {
             currentDialogue,
             currentBranch,
             messages,
+            isLoading,
             selectedModel,
             setSelectedModel,
             startNewDialogue,
