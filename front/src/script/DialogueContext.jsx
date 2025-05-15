@@ -122,7 +122,7 @@ export const DialogueProvider = ({children}) => {
             if (!dialogueResponse) {
                 throw new Error('Диалог не найден');
             }
-            const dialogue = Array.isArray(dialogueResponse) ? dialogueResponse[0] : dialogueResponse;
+            const dialogue = Array.isArray(dialogueResponse) ? dialogueResponse : dialogueResponse;
 
             const branchesResponse = await getBranchesByDialogue(dialogueId);
             const branches = Array.isArray(branchesResponse) ? branchesResponse : [branchesResponse];
@@ -138,10 +138,11 @@ export const DialogueProvider = ({children}) => {
 
             const messagesResponse = await getMessages(mainBranch.id);
             const messages = Array.isArray(messagesResponse) ? messagesResponse : [messagesResponse];
+            messages.shift()
 
             setCurrentDialogue([dialogue]);
             setCurrentBranch([mainBranch]);
-            setMessages(messages.shift());
+            setMessages(messages);
 
             return {dialogue, branch: mainBranch, messages};
 
@@ -218,7 +219,7 @@ export const DialogueProvider = ({children}) => {
             setCurrentBranch([newBranch]);
             setMessages([]);
 
-            return { dialogue: newDialogue, branch: newBranch };
+            return {dialogue: newDialogue, branch: newBranch};
         } catch (error) {
             console.error('Ошибка создания нового чата:', error);
             throw error;
