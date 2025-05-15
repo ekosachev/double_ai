@@ -9,10 +9,18 @@ import { useDialogue } from './DialogueContext';
 
 function Menu({ onHistoryToggle, onPromptOpen }) {
     const { t } = useTranslation();
-    const { selectedModel, setSelectedModel, sendMessage, fetchChatHistory } = useDialogue();
+    const { selectedModel, setSelectedModel, setCurrentDialogue, setCurrentBranch, setMessages, fetchChatHistory, createNewChat, responseLength, setResponseLength} = useDialogue();
     const availableModels = ['Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
     const [isModelListVisible, setIsModelListVisible] = useState(false);
     const [isAddUserVisible, setIsAddUserVisible] = useState(false);
+
+    const handleLengthSelect = (length) => {
+        setResponseLength(length);
+    };
+
+    const getLengthButtonClass = (length) => {
+        return `params-action ${responseLength === length ? 'params-action-active' : 'params-action-disable'}`;
+    };
 
     const handleModelSelect = (model) => {
         setSelectedModel(model);
@@ -22,7 +30,9 @@ function Menu({ onHistoryToggle, onPromptOpen }) {
     const handleNewChat = async (e) => {
         e.preventDefault();
         try {
-            await sendMessage(selectedModel);
+            setCurrentDialogue([]);
+            setCurrentBranch([]);
+            await createNewChat();
         } catch (error) {
             console.error('Ошибка создания нового чата:', error);
         }
@@ -50,7 +60,7 @@ function Menu({ onHistoryToggle, onPromptOpen }) {
                 </a>
 
                 <div className="menu-group-params">
-                {isAddUserVisible && (
+                    {isAddUserVisible && (
                         <div className="user-add">
                             <input type="text" className="input-id-user" placeholder={t('menu.addUser.input')}/>
                             <div className="push-user-id">
@@ -59,9 +69,32 @@ function Menu({ onHistoryToggle, onPromptOpen }) {
                         </div>
                     )}
 
-                    <a href="#" className="params-action params-action-disable">{t('menu.short')}</a>
-                    <a href="#" className="params-action params-action-active">{t('menu.standard')}</a>
-                    <a href="#" className="params-action params-action-disable">{t('menu.detail')}</a>
+                    <a href="#"
+                       className={getLengthButtonClass('short')}
+                       onClick={(e) => {
+                           e.preventDefault();
+                           handleLengthSelect('short');
+                       }}>
+                        {t('menu.short')}
+                    </a>
+
+                    <a href="#"
+                       className={getLengthButtonClass('standard')}
+                       onClick={(e) => {
+                           e.preventDefault();
+                           handleLengthSelect('standard');
+                       }}>
+                        {t('menu.standard')}
+                    </a>
+
+                    <a href="#"
+                       className={getLengthButtonClass('detail')}
+                       onClick={(e) => {
+                           e.preventDefault();
+                           handleLengthSelect('detail');
+                       }}>
+                        {t('menu.detail')}
+                    </a>
 
                     <a href="#" className="params-action params-action-active action-list"
                        onClick={(e) => {

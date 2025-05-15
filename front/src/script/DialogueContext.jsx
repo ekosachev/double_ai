@@ -17,13 +17,21 @@ export const DialogueProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [chatHistory, setChatHistory] = useState({});
     const [isHistoryLoading, setIsHistoryLoading] = useState(false);
-
+    const [responseLength, setResponseLength] = useState('standard');
 
     const sendMessage = async (messageText) => {
         if (!messageText.trim()) return null;
 
         try {
             setIsLoading(true);
+
+            const lengthInstruction = {
+                short: ". Ответь кратко, 1-2 предложения",
+                standard: "",
+                detail: ". Ответь максимально подробно с примерами"
+            }[responseLength];
+
+            const fullMessage = `${messageText}`;
 
             let branchId;
             let newDialogue, newBranch;
@@ -49,7 +57,7 @@ export const DialogueProvider = ({children}) => {
             }
 
             const [newMessage] = await createMessage([{
-                user_message: messageText,
+                user_message: fullMessage + lengthInstruction,
                 model_response: '',
                 branch_id: branchId,
                 previous_message_id: messages.length > 0 ? messages[messages.length - 1]?.id : null,
@@ -123,7 +131,7 @@ export const DialogueProvider = ({children}) => {
                 throw new Error('Ветки не найдены');
             }
 
-            const mainBranch = branches.find(b => b?.name === 'Основная ветка') || branches[0];
+            const mainBranch = branches[0];
             if (!mainBranch?.id) {
                 throw new Error('Не удалось определить ветку');
             }
@@ -133,7 +141,7 @@ export const DialogueProvider = ({children}) => {
 
             setCurrentDialogue([dialogue]);
             setCurrentBranch([mainBranch]);
-            setMessages(messages);
+            setMessages(messages.shift());
 
             return {dialogue, branch: mainBranch, messages};
 
@@ -158,6 +166,7 @@ export const DialogueProvider = ({children}) => {
                 try {
                     const branches = await getBranchesByDialogue(dialogue.id);
                     const messages = await getMessageById(branches.id);
+                    console.log(messages);
                     const firstMessageDate = new Date(messages.timestamp);
                     const dateKey = firstMessageDate.toLocaleDateString();
 
@@ -171,6 +180,7 @@ export const DialogueProvider = ({children}) => {
                         preview: messages.user_message,
                         date: firstMessageDate
                     });
+                    console.log(historyData)
                 } catch (e) {
                     console.error(`Ошибка загрузки веток для диалога ${dialogue.id}:`, e);
                 }
@@ -188,6 +198,35 @@ export const DialogueProvider = ({children}) => {
         }
     };
 
+    const createNewChat = async () => {
+        try {
+            setIsLoading(true);
+
+            const [newDialogue] = await createDialogue([{
+                name: `Новый чат ${new Date().toLocaleString()}`,
+                model: selectedModel,
+                creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
+            }]);
+
+            const [newBranch] = await createBranch([{
+                dialogue_id: newDialogue.id,
+                name: 'Основная ветка',
+                creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
+            }]);
+
+            setCurrentDialogue([newDialogue]);
+            setCurrentBranch([newBranch]);
+            setMessages([]);
+
+            return { dialogue: newDialogue, branch: newBranch };
+        } catch (error) {
+            console.error('Ошибка создания нового чата:', error);
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <DialogueContext.Provider value={{
             currentDialogue,
@@ -201,8 +240,11 @@ export const DialogueProvider = ({children}) => {
             setCurrentDialogue,
             setCurrentBranch,
             chatHistory,
+            createNewChat,
             fetchChatHistory,
-            isHistoryLoading
+            isHistoryLoading,
+            responseLength,
+            setResponseLength
         }}>
             {children}
         </DialogueContext.Provider>

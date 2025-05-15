@@ -8,7 +8,6 @@ function HistoryDialogs({ isOpen, onClose }) {
 
     const handleChatSelect = async (dialogueId) => {
         try {
-            console.log('1')
             await loadDialogue(dialogueId);
             onClose();
         } catch (error) {
