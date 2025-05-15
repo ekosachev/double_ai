@@ -3,6 +3,7 @@ from fastapi import HTTPException
 from .db import AsyncSession
 from ..schemas import dialogue as messsage_schemas
 from .models import models
+from typing import Optional
 
 
 async def create_dialogue(
@@ -22,8 +23,12 @@ async def create_dialogue(
     return created_objects
 
 
-async def get_dialogues(session: AsyncSession) -> list[messsage_schemas.Dialogue]:
+async def get_dialogues(
+    session: AsyncSession, creator: Optional[str] = None
+) -> list[messsage_schemas.Dialogue]:
     stmt = sqla.select(models.Dialogue)
+    if creator is not None:
+        stmt.where(models.Dialogue.creator == creator)
     dialogues = (await session.execute(stmt)).scalars().all()
 
     return [

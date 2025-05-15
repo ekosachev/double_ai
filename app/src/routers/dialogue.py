@@ -1,4 +1,5 @@
 import fastapi
+from typing import Optional
 
 from src.database.db import get_session
 from ..schemas import dialogue as schemas
@@ -8,8 +9,10 @@ router = fastapi.APIRouter(prefix="/dialogue")
 
 
 @router.get("/", response_model=list[schemas.Dialogue])
-async def get_dialogues(session=fastapi.Depends(get_session)) -> list[schemas.Dialogue]:
-    return await services.get_dialogues(session)
+async def get_dialogues(
+    creator: Optional[str] = None, session=fastapi.Depends(get_session)
+) -> list[schemas.Dialogue]:
+    return await services.get_dialogues(session, creator)
 
 
 @router.get("/{dialogue_id}", response_model=schemas.Dialogue)
