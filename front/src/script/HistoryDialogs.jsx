@@ -8,7 +8,7 @@ function HistoryDialogs({ isOpen, onClose }) {
 
     const handleChatSelect = async (dialogueId) => {
         try {
-            await loadDialogue(dialogueId);
+            await loadDialogue(dialogueId, window.Telegram.WebApp.initDataUnsafe.user?.id || 'anon');
             onClose();
         } catch (error) {
             console.error('Ошибка загрузки чата:', error);
