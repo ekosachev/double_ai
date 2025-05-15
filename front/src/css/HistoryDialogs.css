@@ -1,57 +1,190 @@
-.bg{
-    position: absolute;
+/*.bg{*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background: rgba(0, 0, 0, 0.50);*/
+/*    z-index: 999;*/
+/*}*/
+/*.bgHistory {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 8px;*/
+/*    background: #D9D9D9;*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    width: 250px;*/
+/*    height: 100%;*/
+/*    z-index: 1000;*/
+/*    padding: 12px;*/
+/*    overflow-y: scroll;*/
+/*}*/
+/*.disable-history-list{*/
+/*    display: none;*/
+/*}*/
+
+/*.history-date-group{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 8px;*/
+/*}*/
+
+/*.history-date{*/
+/*    color: #737373;*/
+/*    font-size: 18px;*/
+/*    font-style: normal;*/
+/*    font-weight: 400;*/
+/*    line-height: normal;*/
+/*}*/
+
+/*.history-item a{*/
+/*    padding-left: 10px;*/
+/*    width: 204px;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    white-space: nowrap;*/
+/*    display: inline-block;*/
+/*    color: #000;*/
+/*    font-size: 16px;*/
+/*    font-style: normal;*/
+/*    font-weight: 400;*/
+/*    line-height: normal;*/
+/*    text-decoration: none;*/
+/*    border: 1px solid transparent;*/
+/*    border-radius: 20px;*/
+/*}*/
+/*.history-item:hover a, .history-item:active a{*/
+/*    border-color: black;*/
+/*}*/
+
+/*.history-container {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    z-index: 1000;*/
+/*}*/
+
+/*.history-overlay {*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background: rgba(0,0,0,0.5);*/
+/*}*/
+
+/*.history-content {*/
+/*    position: absolute;*/
+/*    right: 0;*/
+/*    width: 300px;*/
+/*    height: 100%;*/
+/*    background: white;*/
+/*    padding: 20px;*/
+/*    overflow-y: auto;*/
+/*}*/
+
+/*.history-date-group {*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.history-date {*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*.history-item {*/
+/*    padding: 8px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*.history-item:hover {*/
+/*    background: #f0f0f0;*/
+/*}*/
+
+.active-history-list {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.50);
-}
-.bgHistory {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    background: #D9D9D9;
-    position: absolute;
-    top: 0;
-    width: 250px;
-    height: 100%;
     z-index: 1000;
-    padding: 12px;
 }
-.disable-history-list{
+
+.disable-history-list {
     display: none;
 }
 
-.history-date-group{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
 }
 
-.history-date{
-    color: #737373;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.bgHistory {
+    position: absolute;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: white;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
 }
 
-.history-item a{
-    padding-left: 10px;
-    width: 204px;
+.history-header {
+    font-size: 16px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.history-header h3 {
+    font-size: 16px;
+}
+
+.history-date-group {
+    margin-bottom: 25px;
+}
+
+.history-date {
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.history-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.history-item:hover {
+    background: #f0f0f0;
+}
+
+.history-item-title {
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.history-item-preview {
+    font-size: 14px;
+    color: #666;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    color: #000;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-    border: 1px solid transparent;
-    border-radius: 20px;
 }
-.history-item:hover a, .history-item:active a{
-    border-color: black;
+
+.loading {
+    padding: 20px;
+    text-align: center;
+    color: #666;
 }

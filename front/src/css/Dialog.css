@@ -1,14 +1,79 @@
+.dialog-chat {
+    width: 100%;
+    height: 83%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 8px 6px;
+}
+
+.dialog-messages {
+    overflow: auto;
+}
+
+.dialog-message {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.message-user {
+    width: 294px;
+    align-self: end;
+    padding: 4px;
+    background-color: #525252;
+    border-radius: 4px;
+}
+
+.message-bot {
+    background-color: #525252;
+    border-radius: 4px;
+    padding: 4px;
+    width: 294px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-self: start;
+}
+
+.chat-neural-text, .message-user {
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.chat-neural-decoration {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: start;
+}
+
+.neural-decoration-text {
+    color: #FFF;
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: #737373;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
 
 .dialog {
     height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     padding: 0 6px;
 }
 
 .dialog-input-group {
+    max-height: 80px;
     border-radius: 6px;
     background: #D9D9D9;
     height: 50px;
@@ -21,6 +86,7 @@
 }
 
 .input-group-message {
+    height: 100%;
     border-radius: 6px;
     background: #D9D9D9;
     border-color: transparent;
@@ -31,6 +97,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    resize: none;
 }
 
 .input-group-message::placeholder {
@@ -41,7 +108,26 @@
     line-height: normal;
 }
 
+.input-group-send {
+    background-color: transparent;
+    border: none;
+}
+
 .input-group-send img {
     height: 30px;
     width: 30px;
 }
+
+.dialogue-header {
+    padding: 10px 15px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*.dialogue-header model {*/
+/*    color: #666;*/
+/*    font-weight: normal;*/
+/*}*/

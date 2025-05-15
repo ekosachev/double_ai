@@ -1,0 +1,254 @@
+{
+  "ru": {
+    "category": {
+      "health": {
+        "title": "Здоровье",
+        "items": {
+          "1": {
+            "mini-name": "Диагностика симптомов",
+            "description": "[Возраст, пол, образ жизни, симптомы, жалобы]. На основе описанных симптомов и образа жизни предположи возможные причины недомогания. Дай рекомендации по улучшению самочувствия, подскажи, к каким специалистам можно обратиться, и какие обследования стоит пройти."
+          },
+          "2": {
+            "mini-name": "Оптимизация режима дня",
+            "description": "Оптимизируй мой режим дня с точки зрения здоровья. Подскажи, как улучшить сон, питание, активность и уменьшить стресс, не внося кардинальных изменений в расписание. Вот мой типичный день: [описание]."
+          },
+          "3": {
+            "mini-name": "Достижение цели по здоровью",
+            "description": "Я хочу достичь следующей цели: [цель — например, высыпаться, сбросить вес, уменьшить тревожность]. Подскажи, как подстроить под неё питание, сон, активность и ритуалы восстановления. Учитывай мой текущий образ жизни: [описание]."
+          }
+        }
+      },
+      "education": {
+        "title": "Образование",
+        "items": {
+          "1": {
+            "mini-name": "Подготовка к экзамену",
+            "description": "Помоги подготовиться к экзамену/тесту по [предмету]. Составь стратегию подготовки, распределение тем по дням, типовые ошибки, которые стоит проработать, и методы самопроверки. Моя ситуация: [дата экзамена, что знаю, что не получается]."
+          },
+          "2": {
+            "mini-name": "Оценка знаний",
+            "description": "Проведи оценку моего учебного прогресса по [теме/курсу]. Оцени, насколько глубоко я понимаю материал, где есть пробелы и какие упражнения или объяснения помогут их устранить. Мой текущий прогресс: [список пройденного, сложности]."
+          },
+          "3": {
+            "mini-name": "Индивидуальный план обучения",
+            "description": "Составь индивидуальный план изучения [предмета] на [срок], с учётом моего уровня и доступного времени. Разбей на этапы, укажи ресурсы (книги, видео, задачи), контрольные точки и практические задания. Мои данные: [уровень, время, цель]."
+          },
+          "4": {
+            "mini-name": "Поиск мотивации",
+            "description": "Помоги найти мотивацию для регулярной учёбы. Учитывай мои сложности: [например, мне сложно концентрироваться и быстро теряется интерес]. Подскажи, какие ритуалы, стимулы или изменения в среде могут помочь."
+          }
+        }
+      },
+      "psychology": {
+        "title": "Психология",
+        "items": {
+          "1": {
+            "mini-name": "Анализ эмоционального состояния",
+            "description": "В последнее время я чувствую [описание симптомов, эмоций, стресса]. Подскажи, какие внутренние или внешние факторы могут быть причинами, и предложи практические методы для улучшения самочувствия и восстановления баланса."
+          },
+          "2": {
+            "mini-name": "Преодоление страхов",
+            "description": "Как перестать бояться или избегать определённых ситуаций (например, публичных выступлений, принятия решений)? Подскажи, как изменить восприятие этих ситуаций и научиться справляться с ними. Моя ситуация: [описание страха/тревоги]."
+          },
+          "3": {
+            "mini-name": "Как справляться с трудными ситуациями",
+            "description": "Проанализируй мою реакцию на конфликтные ситуации или стресс. Укажи, какие мои автоматические реакции могут быть неэффективными, и предложи стратегии для более здоровых способов реагировать и справляться с трудными ситуациями. Вот примеры: [описание конфликтов, реакции]."
+          },
+          "4": {
+            "mini-name": "Преодоление психологических барьеров",
+            "description": "Помоги мне разобраться с психологическими барьерами, которые мешают двигаться вперёд. Проанализируй, что может стоять на пути к моим целям или развитию. Как преодолеть эти барьеры? Вот мои ситуация: [описание ситуации, ограничений]."
+          }
+        }
+      },
+      "creation": {
+        "title": "Творчество",
+        "items": {
+          "1": {
+            "mini-name": "Создание уникальных элементов",
+            "description": "Помоги мне создать уникальный стиль для [моего проекта/творческого процесса], используя [уникальные материалы, техники или подходы]. Подскажи, как сочетать разные элементы, чтобы проект выглядел оригинально и привлекал внимание."
+          },
+          "2": {
+            "mini-name": "Оценить креативность идеи",
+            "description": "Проанализируй мою идею для [видеопроекта/сценария/фото-сессии]. Подскажи, как лучше организовать структуру работы, какие акценты нужно расставить, чтобы она была более привлекательной для аудитории. Какие аспекты я мог бы сделать более выразительными или необычными?"
+          },
+          "3": {
+            "mini-name": "Рекомендации книг и фильмов",
+            "description": "Подскажи, какие [книги/фильмы/сериалы] мне стоит посмотреть, если мне нравятся [жанры]. Дай рекомендации на основе моих предпочтений, чтобы я мог погрузиться в новые истории."
+          },
+          "4": {
+            "mini-name": "Рекомендации хобби",
+            "description": "Предложи, каким хобби заняться, исходя из того, что я люблю [читать, рисовать, играть в игры]. Укажи интересные идеи или активности, которые могут быть увлекательными и помочь мне провести время с пользой."
+          }
+        }
+      },
+      "newsAndTrends": {
+        "title": "Новости и тренды",
+        "items": {
+          "1": {
+            "mini-name": "Актуальные тренды",
+            "description": "Расскажи, какие новые тренды в [моде/технологиях/музыке] появились в последние недели. Расскажи, какие новшества или актуальные направления могут быть интересными и что стоит обсудить или изучить."
+          },
+          "2": {
+            "mini-name": "Новости науки и бизнеса",
+            "description": "Что нового в [науке/бизнесе/образовании] появилось на прошлой неделе, что стоит обсудить или изучить? Какие изменения или инновации в этих областях заслуживают внимания и могут повлиять на текущие тренды?"
+          },
+          "3": {
+            "mini-name": "Новые продукты и сервисы",
+            "description": "Расскажи, какие новые продукты или сервисы появились в [интересующая индустрия] за последние 2 недели. Какие из них стоит попробовать или исследовать?"
+          },
+          "4": {
+            "mini-name": "Новости в мире науки",
+            "description": "Какие научные статьи по [теме] были опубликованы за последний месяц? Расскажи о самых свежих исследованиях, которые могут быть полезны для понимания текущих трендов в этой области."
+          }
+        }
+      },
+      "communication": {
+        "title": "Общение",
+        "items": {
+          "1": {
+            "mini-name": "Как начать общение с человеком?",
+            "description": "Как начать разговор с [человеком, с которым мне неудобно общаться/новым знакомым]? Подскажи, с чего начать беседу, чтобы не чувствовать себя неловко и завести интересный разговор."
+          },
+          "2": {
+            "mini-name": "Идеи для встреч с друзьями",
+            "description": "Как интересно провести время с друзьями? Нас [количество], мы любим [увлечения]? Что можно сделать нового и необычного, чтобы провести время весело и интересно?"
+          },
+          "3": {
+            "mini-name": "Выбор подарка",
+            "description": "Что можно подарить [человеку] на [праздник]? Человек любит и интересуется следующими темами и вещами: [предпочтения человека]."
+          },
+          "4": {
+            "mini-name": "Организация праздника",
+            "description": "Как организовать [праздник]? Мы хотим устроить вечер в стиле [кино/игры/эпохи], но не знаем, с чего начать. Помоги придумать концепцию, развлечения и атмосферу."
+          }
+        }
+      }
+    }
+  },
+  "en": {
+    "category": {
+      "health": {
+        "title": "Health",
+        "items": {
+          "1": {
+            "mini-name": "Symptom Diagnosis",
+            "description": "[Age, gender, lifestyle, symptoms, complaints]. Based on the described symptoms and lifestyle, suggest possible causes of discomfort. Provide recommendations for improving well-being, suggest which specialists to consult, and what examinations to undergo."
+          },
+          "2": {
+            "mini-name": "Daily Routine Optimization",
+            "description": "Optimize my daily routine from a health perspective. Suggest how to improve sleep, nutrition, activity, and reduce stress without making drastic changes to the schedule. Here's my typical day: [description]."
+          },
+          "3": {
+            "mini-name": "Achieving Health Goals",
+            "description": "I want to achieve the following goal: [goal - e.g., get enough sleep, lose weight, reduce anxiety]. Suggest how to adjust nutrition, sleep, activity, and recovery rituals to achieve it. Consider my current lifestyle: [description]."
+          }
+        }
+      },
+      "education": {
+        "title": "Education",
+        "items": {
+          "1": {
+            "mini-name": "Exam Preparation",
+            "description": "Help me prepare for an exam/test in [subject]. Create a preparation strategy, distribute topics by day, identify common mistakes to work on, and suggest self-assessment methods. My situation: [exam date, what I know, what I struggle with]."
+          },
+          "2": {
+            "mini-name": "Knowledge Assessment",
+            "description": "Assess my learning progress in [topic/course]. Evaluate how deeply I understand the material, identify gaps, and suggest exercises or explanations to address them. My current progress: [list of completed topics, difficulties]."
+          },
+          "3": {
+            "mini-name": "Personalized Learning Plan",
+            "description": "Create a personalized plan for studying [subject] over [timeframe], considering my level and available time. Break it into stages, suggest resources (books, videos, exercises), milestones, and practical assignments. My details: [level, time, goal]."
+          },
+          "4": {
+            "mini-name": "Finding Motivation",
+            "description": "Help me find motivation for regular studying. Consider my challenges: [e.g., difficulty concentrating, quickly losing interest]. Suggest rituals, incentives, or environmental changes that could help."
+          }
+        }
+      },
+      "psychology": {
+        "title": "Psychology",
+        "items": {
+          "1": {
+            "mini-name": "Emotional State Analysis",
+            "description": "Lately, I've been feeling [description of symptoms, emotions, stress]. Suggest what internal or external factors might be the causes and propose practical methods to improve well-being and restore balance."
+          },
+          "2": {
+            "mini-name": "Overcoming Fears",
+            "description": "How can I stop fearing or avoiding certain situations (e.g., public speaking, decision-making)? Suggest how to change my perception of these situations and learn to cope with them. My situation: [description of fear/anxiety]."
+          },
+          "3": {
+            "mini-name": "Dealing with Difficult Situations",
+            "description": "Analyze my reaction to conflict situations or stress. Point out which of my automatic reactions might be ineffective and suggest strategies for healthier ways to respond and cope with difficult situations. Here are examples: [description of conflicts, reactions]."
+          },
+          "4": {
+            "mini-name": "Overcoming Psychological Barriers",
+            "description": "Help me understand the psychological barriers holding me back. Analyze what might be standing in the way of my goals or development. How can I overcome these barriers? Here's my situation: [description of situation, limitations]."
+          }
+        }
+      },
+      "creation": {
+        "title": "Creation",
+        "items": {
+          "1": {
+            "mini-name": "Creating Unique Elements",
+            "description": "Help me create a unique style for [my project/creative process] using [unique materials, techniques, or approaches]. Suggest how to combine different elements to make the project look original and attention-grabbing."
+          },
+          "2": {
+            "mini-name": "Evaluating Idea Creativity",
+            "description": "Analyze my idea for [video project/script/photo shoot]. Suggest how to better organize the work structure and what accents to place to make it more appealing to the audience. What aspects could I make more expressive or unusual?"
+          },
+          "3": {
+            "mini-name": "Book and Movie Recommendations",
+            "description": "Suggest which [books/movies/TV shows] I should check out if I like [genres]. Provide recommendations based on my preferences so I can dive into new stories."
+          },
+          "4": {
+            "mini-name": "Hobby Recommendations",
+            "description": "Suggest hobbies based on what I enjoy [reading, drawing, gaming]. Provide interesting ideas or activities that could be engaging and help me spend time productively."
+          }
+        }
+      },
+      "newsAndTrends": {
+        "title": "News & Trends",
+        "items": {
+          "1": {
+            "mini-name": "Current Trends",
+            "description": "Tell me about new trends in [fashion/technology/music] that have emerged in recent weeks. Discuss what innovations or relevant directions might be interesting and worth exploring or discussing."
+          },
+          "2": {
+            "mini-name": "Science and Business News",
+            "description": "What's new in [science/business/education] from the past week is worth discussing or exploring? What changes or innovations in these fields deserve attention and might influence current trends?"
+          },
+          "3": {
+            "mini-name": "New Products and Services",
+            "description": "Tell me about new products or services in [industry of interest] that have appeared in the last 2 weeks. Which ones are worth trying or researching?"
+          },
+          "4": {
+            "mini-name": "Science News",
+            "description": "What scientific papers on [topic] have been published in the last month? Discuss the latest research that might be useful for understanding current trends in this field."
+          }
+        }
+      },
+      "communication": {
+        "title": "Communication",
+        "items": {
+          "1": {
+            "mini-name": "How to Start a Conversation?",
+            "description": "How do I start a conversation with [someone I feel uncomfortable talking to/a new acquaintance]? Suggest how to begin the discussion to avoid awkwardness and have an engaging conversation."
+          },
+          "2": {
+            "mini-name": "Ideas for Hangouts with Friends",
+            "description": "How can I have fun with friends? There are [number] of us, and we enjoy [hobbies]. What new and unusual things can we do to have a fun and interesting time?"
+          },
+          "3": {
+            "mini-name": "Gift Selection",
+            "description": "What can I give [person] for [holiday]? The person likes and is interested in the following topics and things: [person's preferences]."
+          },
+          "4": {
+            "mini-name": "Party Organization",
+            "description": "How to organize a [holiday] party? We want to host an evening in [movie/game/historical era] style but don't know where to start. Help come up with a concept, entertainment, and atmosphere."
+          }
+        }
+      }
+    }
+  }
+}

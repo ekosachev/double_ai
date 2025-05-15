@@ -1,0 +1,28 @@
+{
+  "menu": {
+    "short": "Short",
+    "standard": "Standard",
+    "detail": "Detail",
+    "prompt": "Prompt",
+    "addUser": {
+      "input": "Enter the user's ID",
+      "add": "Add"
+    }
+  },
+  "dialog": {
+    "input": "Ask a question"
+  },
+
+  "history": {
+    "title": "Chat History",
+    "loading": "Loading history...",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "thisWeek": "This week",
+    "earlier": "Earlier"
+  },
+
+  "prompts": {
+    "header": "Assign a prompt"
+  }
+}

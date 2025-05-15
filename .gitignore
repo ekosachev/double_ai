@@ -16,3 +16,4 @@ app/.venv
 db.env
 
 .idea
+bot/.venv

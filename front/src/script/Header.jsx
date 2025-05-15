@@ -1,7 +1,6 @@
 import '../css/Header.css'
-import settingIcon from '../assets/icons/setting.svg';
-import languageIcon from '../assets/icons/language.svg';
 import {useEffect, useState} from "react";
+import {changeLanguage} from "i18next";
 
 function Header() {
 
@@ -13,10 +12,6 @@ function Header() {
             setUser(window.Telegram.WebApp.initDataUnsafe.user);
         }
     }, []);
-
-    const handleSettingsClick = (e) => {
-        e.preventDefault();
-    };
 
     const handleLanguagesClick = (e) => {
         e.preventDefault();
@@ -30,20 +25,15 @@ function Header() {
         e.preventDefault();
     };
 
-    console.log()
-
     return (
         <div className="header">
             <div className="container">
-                <div className="bg-black"></div>
+                <div className="bg-black" onClick={(e) => handleLanguagesClick(e)}></div>
                 <div className="header-logo-group">
                     <img src="../../public/logo.svg" alt="Логотип" className="logo-group-image"/>
                     <div className="logo-group-text">Double AI</div>
                 </div>
                 <div className="header-action-group">
-                    <a href="#" className="action-group-setting" onClick={handleSettingsClick}>
-                        <img src={settingIcon} alt="Настройки"/>
-                    </a>
                     <div className="action-group-languages-bg">
                         <a href="#" className="action-group-languages" onClick={handleLanguagesClick}>
                             {/*<img src={languageIcon} alt="Язык"/>*/}
@@ -66,16 +56,22 @@ function Header() {
                         <div className="languages-list-group">
                             <ul>
                                 <li className="language">
-                                    <a href="#">Русский</a>
+                                    <a href="#" onClick={(e) => {changeLanguage ("ru"); handleLanguagesClick(e);}}>Русский</a>
                                 </li>
                                 <li className="language">
-                                    <a href="#">English</a>
+                                    <a href="#" onClick={(e) => {changeLanguage ("en"); handleLanguagesClick(e);}}>English</a>
                                 </li>
                             </ul>
                         </div>
                     )}
                     <a href="#" className="action-group-profile" onClick={handleProfileClick}>
-                        <div className="profile-text" id="profile-text">ЛВ</div>
+                        {/*<div className="profile-text" id="profile-text">ЛВ</div>*/}
+                        {user?.photo_url ? (<img src={user.photo_url} alt="Фото профиля"/>)
+                            : (<div className="profile-text">
+                                {user?.first_name?.[0]}
+                                {user?.last_name?.[0]}
+                            </div>)
+                        }
                     </a>
                 </div>
             </div>
