@@ -205,13 +205,13 @@ export const DialogueProvider = ({children}) => {
             const [newDialogue] = await createDialogue([{
                 name: `Новый чат ${new Date().toLocaleString()}`,
                 model: selectedModel,
-                creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
+                creator: String(window.Telegram.WebApp.initDataUnsafe.user?.id) || 'anonymous'
             }]);
 
             const [newBranch] = await createBranch([{
                 dialogue_id: newDialogue.id,
                 name: 'Основная ветка',
-                creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
+                creator: String(window.Telegram.WebApp.initDataUnsafe.user?.id) || 'anonymous'
             }]);
 
             setCurrentDialogue([newDialogue]);
