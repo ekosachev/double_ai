@@ -38,8 +38,8 @@ function Dialog() {
     };
 
     return (
-        <div className='dialog'>
-            <div className="dialog-chat">
+        <div className="dialog-chat">
+            <div className="dialog-messages">
                 {messages.map((message) => (
                     <div key={message.id} className="dialog-message">
                         {message.user_message && (
@@ -80,7 +80,8 @@ function Dialog() {
                 </button>
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default Dialog;

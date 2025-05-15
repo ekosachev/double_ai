@@ -1,5 +1,13 @@
 .dialog-chat {
     width: 100%;
+    height: 83%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 8px 6px;
+}
+
+.dialog-messages {
     overflow: auto;
 }
 
@@ -109,3 +117,17 @@
     height: 30px;
     width: 30px;
 }
+
+.dialogue-header {
+    padding: 10px 15px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*.dialogue-header model {*/
+/*    color: #666;*/
+/*    font-weight: normal;*/
+/*}*/

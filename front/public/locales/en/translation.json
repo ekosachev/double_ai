@@ -14,11 +14,12 @@
   },
 
   "history": {
+    "title": "Chat History",
+    "loading": "Loading history...",
     "today": "Today",
     "yesterday": "Yesterday",
-    "week": "7 days",
-    "2week": "14 days",
-    "month": "30 days"
+    "thisWeek": "This week",
+    "earlier": "Earlier"
   },
 
   "prompts": {

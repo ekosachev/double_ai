@@ -1,5 +1,4 @@
 import '../css/Header.css'
-import settingIcon from '../assets/icons/setting.svg';
 import {useEffect, useState} from "react";
 import {changeLanguage} from "i18next";
 
@@ -13,10 +12,6 @@ function Header() {
             setUser(window.Telegram.WebApp.initDataUnsafe.user);
         }
     }, []);
-
-    const handleSettingsClick = (e) => {
-        e.preventDefault();
-    };
 
     const handleLanguagesClick = (e) => {
         e.preventDefault();
@@ -39,9 +34,6 @@ function Header() {
                     <div className="logo-group-text">Double AI</div>
                 </div>
                 <div className="header-action-group">
-                    <a href="#" className="action-group-setting" onClick={handleSettingsClick}>
-                        <img src={settingIcon} alt="Настройки"/>
-                    </a>
                     <div className="action-group-languages-bg">
                         <a href="#" className="action-group-languages" onClick={handleLanguagesClick}>
                             {/*<img src={languageIcon} alt="Язык"/>*/}

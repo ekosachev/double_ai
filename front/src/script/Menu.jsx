@@ -9,8 +9,7 @@ import { useDialogue } from './DialogueContext';
 
 function Menu({ onHistoryToggle, onPromptOpen }) {
     const { t } = useTranslation();
-    const { selectedModel, setSelectedModel, sendMessage } = useDialogue();
-    /*'DeepSeek V3',*/
+    const { selectedModel, setSelectedModel, sendMessage, fetchChatHistory } = useDialogue();
     const availableModels = ['Microsoft Phi 4 Reasoning', 'Quen 3', 'InternVL3', 'Llama 3.3 Nemotron Super'];
     const [isModelListVisible, setIsModelListVisible] = useState(false);
     const [isAddUserVisible, setIsAddUserVisible] = useState(false);
@@ -29,6 +28,16 @@ function Menu({ onHistoryToggle, onPromptOpen }) {
         }
     };
 
+    const handleHistoryClick = async (e) => {
+        e.preventDefault();
+        try {
+            onHistoryToggle();
+            await fetchChatHistory();
+        } catch (error) {
+            console.error('Ошибка загрузки истории:', error);
+        }
+    };
+
     return (
         <div className="menu-group">
             <div className="container">
@@ -36,12 +45,12 @@ function Menu({ onHistoryToggle, onPromptOpen }) {
                     <div className="bg-black-add-user" onClick={() => setIsAddUserVisible(false)}></div>
                 )}
 
-                <div className="menu-group-history" onClick={onHistoryToggle}>
+                <a href="#" className="menu-group-history" onClick={handleHistoryClick}>
                     <img src={menuIcon} alt="История"/>
-                </div>
+                </a>
 
                 <div className="menu-group-params">
-                    {isAddUserVisible && (
+                {isAddUserVisible && (
                         <div className="user-add">
                             <input type="text" className="input-id-user" placeholder={t('menu.addUser.input')}/>
                             <div className="push-user-id">
