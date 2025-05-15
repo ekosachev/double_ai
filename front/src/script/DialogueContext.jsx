@@ -46,7 +46,7 @@ export const DialogueProvider = ({children}) => {
                 [newBranch] = await createBranch([{
                     dialogue_id: newDialogue.id,
                     name: 'Основная ветка',
-                    creator: window.Telegram.WebApp.initDataUnsafe.user?.id || 'anonymous'
+                    creator: String(window.Telegram.WebApp.initDataUnsafe.user?.id) || 'anonymous'
                 }]);
 
                 setCurrentDialogue([newDialogue]);
