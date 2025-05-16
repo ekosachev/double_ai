@@ -4,6 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {useDialogue} from './DialogueContext';
 import {useInput} from './InputContext';
 import {useEffect, useRef} from 'react';
+import Markdown from "react-markdown";
 
 function Dialog() {
     const {t} = useTranslation();
@@ -54,7 +55,7 @@ function Dialog() {
                                     <div className="neural-decoration-text">Double AI</div>
                                 </div>
                                 <div className="chat-neural-text">
-                                    {message.model_response}
+                                    <Markdown>{message.model_response}</Markdown>
                                 </div>
                             </div>
                         )}

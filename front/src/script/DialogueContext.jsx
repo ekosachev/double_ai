@@ -114,7 +114,7 @@ export const DialogueProvider = ({children}) => {
         throw new Error(`Не удалось получить ответ после ${maxAttempts} попыток`);
     };
 
-    const loadDialogue = async (dialogueId) => {
+    const loadDialogue = async (dialogueId, creator) => {
         try {
             setIsLoading(true);
 
